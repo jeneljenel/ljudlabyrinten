@@ -96,9 +96,10 @@ html, body{
     align-items: center;
 }
 
-.welcome image{
+.welcome image, #starta{
     display:flex;
     flex-direction: column;
       justify-content: center;
       align-items: center;
 }
+
