@@ -1,3 +1,6 @@
+
+
+
 // Set constraints for the video stream
 var constraints = { video: { facingMode: "environment" }, audio: false };
 // Define constants
@@ -36,6 +39,8 @@ function showWindow() {
   
     document.getElementById("camera--output").style.visibility = "visible";
 }
+
+
 
 
 
