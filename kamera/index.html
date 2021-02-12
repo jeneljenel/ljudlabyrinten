@@ -29,42 +29,11 @@
             <!-- Camera trigger -->
 
             <div id="btnWrp" onclick="showWindow()">
-                <button id="camera--trigger" onclick="myFunction()">Take a picture</button>
+                <a href="spelare.html"> <button id="camera--trigger" onclick="myFunction()">Take a picture</button></a>
              </div>
 
           
 
-
-            <audio controls id="audio">
-                <source src="sound.wav" type="audio/wav">
-                Your browser does not support the audio element.
-            </audio>
-
-            <audio id="myAudio">
-                <source src="sound.wav" type="audio/wav">
-            </audio>
-
-            <div class="wrapper2">
-                <button class="button" id="playPause" onclick="playAudio()">Play Audio</button>
-
-                <script>
-                    var x = document.getElementById("myAudio");
-                    var play = false;
-
-                    function playAudio() {
-
-                        if (play === false) {
-                            play = true;
-                            x.play();
-                            document.getElementById("playPause").innerHTML = "Pause Audio";
-                        } else {
-                            play = false;
-                            x.pause();
-                            document.getElementById("playPause").innerHTML = "Play Audio";
-                        }
-                    }
-
-                </script>
 
             </div>
         </main>
@@ -74,12 +43,7 @@
 
     <!-- Reference to your JavaScript file -->
     <script src="main.js"></script>
-<!-- 
-    <audio controls  id=" audio" >
-        <source src="sound.wav" type="audio/wav" > 
-      Your browser does not support the audio element.
-      </audio>
-    -->
+
     
 </body>
 </html>
