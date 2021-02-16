@@ -7,16 +7,19 @@
     <title>Camera App</title>
     <!-- Link to your main style sheet-->
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="main.js"></script>
 </head>
 
 <body>
 
     <div class="wrapper">
+        <main x-data="state">
         <!-- Camera -->
 
        <!-- Test -->
 
-        <main id="camera">
+        <div id="camera" x-show="user.showQRScanner">
             <!-- FLEX COLUMN -->
             <!-- Camera sensor -->
             <div id="reservedSpace">
@@ -29,20 +32,25 @@
             <!-- Camera trigger -->
 
             <div id="btnWrp" onclick="showWindow()">
-                <a href="spelare.html"> <button id="camera--trigger" onclick="myFunction()">Take a picture</button></a>
+                <button id="camera--trigger" onclick="myFunction()">Take a picture</button>
              </div>
+        </div>
+        
+        <section x-show="!story.loaded">
+            <p>Skanna koden din jävel...</p>
+            <button @click="showQRScanner">QR Skanner </button>
+        </section>
+        
+        <section x-show="story.loaded && story.data">
+            <h1 x-text="story.data.title"></h1>
+        </section>
 
-          
-
-
-            </div>
-        </main>
+    </main>
     </div>
 
 
 
     <!-- Reference to your JavaScript file -->
-    <script src="main.js"></script>
 
     
 </body>
