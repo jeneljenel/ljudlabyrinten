@@ -10,7 +10,13 @@ var state = {
         cameraStart();
         this.user.showQRScanner = true;
     }
+
+
 };
+
+  
+
+
 
 // Access the device camera and stream to cameraView
 function cameraStart() {
@@ -40,6 +46,22 @@ cameraTrigger.onclick = function() {
         console.error("Oops. Something is broken.", error);
     });
 }
+
+     function playAudio() {
+           
+var x = document.getElementById("myAudio");
+var play = false;
+
+         if (play === false) {
+             play = true;
+             x.play();
+            document.getElementById("playPause").innerHTML = "Pause Audio";
+            } else {
+             play = false;
+             x.pause();
+             document.getElementById("playPause").innerHTML = "Play Audio";
+              }
+         }
 
 function showWindow() {
     if (document.getElementById("camera--output").style.visibility === "visible") {
