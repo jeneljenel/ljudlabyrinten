@@ -20,6 +20,7 @@ var state = {
 
 };
 
+Hej
   
 
 // Access the device camera and stream to cameraView
