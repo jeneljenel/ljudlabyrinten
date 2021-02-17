@@ -36,24 +36,32 @@
              </div>
         </div>
         
+        <!-- DEFAULT USER MENU  / -->
         <section x-show="!story.loaded">
             <p>Skanna koden din jävel...</p>
             <button @click="showQRScanner">QR Skanner </button>
+            <audio id="myAudio" loop> <!-- @TODO add autoplay-->
+                <source src="sound.wav" type="audio/wav">
+            </audio>
         </section>
         
+        <!-- Showing story data / @TODO remove in prod. -->
         <section x-show="story.loaded && story.data">
             <h1 x-text="story.data.title"></h1>
         </section>
 
+        <!-- When user has activated a new part of the story -->
         <div class="wrapper2">
+            <button @click="setStoryTrue">Taken picture - active story.loaded</button>
+            <section x-show= "!ljudslinga">
             <audio id="myAudio">
                 <source src="sound.wav" type="audio/wav">
             </audio>
-
-           <div class="wrapper2">
-            <button class="button" id="playPause" @click="playAudio()">Play Audio</button>
-       
-        </div>
+           
+            <button class="audiosource" id="playPause" @click="playAudio()">Play Audio</button>
+        </section>
+    
+    
     
             </div>
 

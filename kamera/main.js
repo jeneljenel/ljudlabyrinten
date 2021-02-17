@@ -4,22 +4,27 @@ var state = {
         data: {}
     },
     user: {
-        showQRScanner: false
+        showQRScanner: false,
+        audiosource: false
+
     },
     showQRScanner: function () {
         cameraStart();
         this.user.showQRScanner = true;
+    },
+     
+    audiosource: function(){
+        playAudio();
+        this.user.audiosource = true;
     }
-
 
 };
 
   
 
-
-
 // Access the device camera and stream to cameraView
 function cameraStart() {
+    console.log("camera start +" + state);
 // Set constraints for the video stream
 var constraints = { video: { facingMode: "environment" }, audio: false };
 // Define constants
@@ -35,6 +40,11 @@ cameraTrigger.onclick = function() {
     cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
     cameraOutput.src = cameraSensor.toDataURL("image/webp");
     cameraOutput.classList.add("taken");
+
+    state.story.loaded = true;
+    state.story.data.title = "test titel laddad";
+    state.user.showQRScanner = false;
+    console.log(state);
 };
     navigator.mediaDevices
         .getUserMedia(constraints)
@@ -47,21 +57,21 @@ cameraTrigger.onclick = function() {
     });
 }
 
-     function playAudio() {
+function playAudio() {
            
-var x = document.getElementById("myAudio");
-var play = false;
+    var x = document.getElementById("myAudio");
+    var play = false;
 
-         if (play === false) {
-             play = true;
-             x.play();
+        if (play === false) {
+            play = true;
+            x.play();
             document.getElementById("playPause").innerHTML = "Pause Audio";
-            } else {
-             play = false;
-             x.pause();
-             document.getElementById("playPause").innerHTML = "Play Audio";
-              }
-         }
+        } else {
+            play = false;
+            x.pause();
+            document.getElementById("playPause").innerHTML = "Play Audio";
+            }
+        }
 
 function showWindow() {
     if (document.getElementById("camera--output").style.visibility === "visible") {
@@ -70,4 +80,10 @@ function showWindow() {
   
     document.getElementById("camera--output").style.visibility = "visible";
 }
+
+function setStoryTrue() {
+    state.story.loaded = true;
+    state.story.data =  {title: "test titel laddad"};
+}
+
 window.state = state;
