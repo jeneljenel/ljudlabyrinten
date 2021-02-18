@@ -7,7 +7,6 @@ var state = {
         showCamera: false,
         showQRScanner: false,
         audiosource: false
-
     },
     showQRScanner: function () {
         QRScannerStart();
@@ -18,8 +17,6 @@ var state = {
         cameraStart();
         this.user.showCamera = true;
     },
-
-     
     audiosource: function(){
         playAudio();
         this.user.audiosource = true;
@@ -29,39 +26,29 @@ var state = {
 
 console.log("START: ");
 console.log(state);
+
 // // QR SCANNER FUNCTION
-
-
+// @TODO : fix.
 function QRScannerStart() {
-    state.user.showQRScanner = true;
     console.log("QR-scanner start " + state);
     console.log(state)
 
-    function onQRCodeScanned(scannedText)
-    {
-    	var scannedTextMemo = document.getElementById("scannedTextMemo");
-    	if(scannedTextMemo)
-    	{
-    		scannedTextMemo.value = scannedText;
-    	}
-    }
-  
-    //this function will be called when JsQRScanner is ready to use
-    function JsQRScannerReady()
-    {
-        //create a new scanner passing to it a callback function that will be invoked when
-        //the scanner succesfully scan a QR code
-        var jbScanner = new JsQRScanner(onQRCodeScanned);
-        //reduce the size of analyzed images to increase performance on mobile devices
-        jbScanner.setSnapImageMaxSize(300);
-    	var scannerParentElement = document.getElementById("scanner");
-    	if(scannerParentElement)
-    	{
-    	    //append the jbScanner to an existing DOM element
-    		jbScanner.appendTo(scannerParentElement);
+    var resultContainer = document.getElementById('qr-reader-results');
+    var lastResult, countResults = 0;
+    
+    function onScanSuccess(qrCodeMessage) {
+        if (qrCodeMessage !== lastResult) {
+            ++countResults;
+            lastResult = qrCodeMessage;
+            resultContainer.innerHTML 
+                += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
         }
     }
-
+    
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);
+   
 }
 
 // // // // // // // // // 
