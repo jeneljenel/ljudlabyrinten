@@ -3,23 +3,32 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Name of your awesome camera app -->
     <title>Camera App</title>
     <!-- Link to your main style sheet-->
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="main.js"></script>
+    
+    <!-- QR code scanner lib -->
 </head>
 
 <body>
 
     <div class="wrapper">
         <main x-data="state">
+
+        
+        <!-- CAMERA OPTION  / -->
+        <section x-show="!story.loaded">
+            <p>Skanna koden din jävel...</p>
+            <button @click="showCamera">Camera Skanner </button>
+            <audio id="myAudio" loop> <!-- @TODO add autoplay-->
+                <source src="sound.wav" type="audio/wav">
+            </audio>
+        </section>
+
         <!-- Camera -->
-
-       <!-- Test -->
-
-        <div id="camera" x-show="user.showQRScanner">
+        <div id="camera" x-show="user.showCamera">
             <!-- FLEX COLUMN -->
             <!-- Camera sensor -->
             <div id="reservedSpace">
@@ -29,22 +38,43 @@
             </div>
             <!-- Camera output -->
             <img src="//:0" alt="" id="camera--output" class="camOutput">
-            <!-- Camera trigger -->
 
+            <!-- Camera trigger -->
             <div id="btnWrp" onclick="showWindow()">
                 <button id="camera--trigger" onclick="myFunction()">Take a picture</button>
-             </div>
+            </div>
         </div>
-        
-        <!-- DEFAULT USER MENU  / -->
+
+
+        <!-- QR SCANNER USER MENU  / -->
         <section x-show="!story.loaded">
-            <p>Skanna koden din jävel...</p>
             <button @click="showQRScanner">QR Skanner </button>
             <audio id="myAudio" loop> <!-- @TODO add autoplay-->
-                <source src="sound.wav" type="audio/wav">
-            </audio>
+            <source src="sound.wav" type="audio/wav">
+            </audio> 
+    
+
         </section>
+
+        <!-- QR Camera scanner -->
+        <div id="camera" x-show="user.showQRScanner">
+            <h1>QR Code Scanner</h1>
         
+            <a id="btn-scan-qr">
+                <img src="https://uploads.sitepoint.com/wp-content/uploads/2017/07/1499401426qr_icon.svg">
+            </a>
+        
+            <canvas hidden="" id="qr-canvas"></canvas>
+        
+            <div id="qr-result" hidden="">
+                <b>Data:</b> <span id="outputData"></span>
+            </div>
+        </div>
+
+                
+
+
+
         <!-- Showing story data / @TODO remove in prod. -->
         <section x-show="story.loaded && story.data">
             <h1 x-text="story.data.title"></h1>
@@ -52,7 +82,6 @@
 
         <!-- When user has activated a new part of the story -->
         <div class="wrapper2">
-
 
             <section x-data="{ showBox: false }">
 
@@ -64,22 +93,15 @@
                         <source src="sound.wav" type="audio/wav">
                     </audio>
 
-                    <button class="audiosource" id="playPause" onclick="playAudio()">Play Audio</button>
+                    <button class="playpause" id="playPause" onclick="playAudio()">Play Audio</button>
                 </div>
 
             </section>
-
-
 
         </div>
 
     </main>
     </div>
-
-
-
-    <!-- Reference to your JavaScript file -->
-
     
 </body>
 </html>
