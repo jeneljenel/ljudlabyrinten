@@ -20,7 +20,6 @@ var state = {
 
 };
 
-Hej
   
 
 // Access the device camera and stream to cameraView
@@ -58,10 +57,17 @@ cameraTrigger.onclick = function() {
     });
 }
 
+
+
+
+
+
+
+var play = false;
+
 function playAudio() {
            
-    var x = document.getElementById("myAudio");
-    var play = false;
+        var x = document.getElementById("myAudio");    
 
         if (play === false) {
             play = true;
@@ -72,7 +78,13 @@ function playAudio() {
             x.pause();
             document.getElementById("playPause").innerHTML = "Play Audio";
             }
-        }
+}
+
+
+
+
+
+
 
 function showWindow() {
     if (document.getElementById("camera--output").style.visibility === "visible") {
@@ -83,6 +95,9 @@ function showWindow() {
 }
 
 function setStoryTrue() {
+
+ 
+
     state.story.loaded = true;
     state.story.data =  {title: "test titel laddad"};
 }

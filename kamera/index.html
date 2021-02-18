@@ -52,18 +52,26 @@
 
         <!-- When user has activated a new part of the story -->
         <div class="wrapper2">
-            <button @click="setStoryTrue">Taken picture - active story.loaded</button>
-            <section x-show= "!ljudslinga">
-            <audio id="myAudio">
-                <source src="sound.wav" type="audio/wav">
-            </audio>
-           
-            <button class="audiosource" id="playPause" @click="playAudio()">Play Audio</button>
-        </section>
-    
-    
-    
-            </div>
+
+
+            <section x-data="{ showBox: false }">
+
+                <button @click="showBox = !showBox">Taken picture ( Och visa ljudFilen! )</button>
+
+                <div x-show="showBox" class="audioWrapper">
+
+                    <audio controls id="myAudio">
+                        <source src="sound.wav" type="audio/wav">
+                    </audio>
+
+                    <button class="audiosource" id="playPause" onclick="playAudio()">Play Audio</button>
+                </div>
+
+            </section>
+
+
+
+        </div>
 
     </main>
     </div>
