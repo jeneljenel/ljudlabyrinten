@@ -10,7 +10,9 @@
     
     <!-- QR code scanner -->
     <script src="https://raw.githubusercontent.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
-    
+    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+    <script src="qrCodeScanner.js"></script>
+
     <script src="main.js"></script>
 </head>
 
@@ -50,7 +52,7 @@
 
         <!-- QR SCANNER USER MENU  / -->
         <section x-show="!story.loaded">
-            <button @click="showQRScanner">QR Scanner </button>
+            <button @click="showQRScanner">QR Scanner första testet.... </button>
             <audio id="myAudio" loop> <!-- @TODO add autoplay-->
             <source src="sound.wav" type="audio/wav">
             </audio> 
@@ -65,8 +67,24 @@
   
             <div id="qr-reader" style="width:500px"></div>
             <div id="qr-reader-results"></div>
+        </div>
 
-
+        
+        <!-- SECOND SCANNER.... -->
+        <div id="wrapper2">
+            <h1>QR Code Scanner andra testet...</h1>
+      
+            <a id="btn-scan-qr">
+              <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
+            </a>
+      
+            <canvas hidden="" id="qr-canvas"></canvas>
+      
+            <div id="qr-result" hidden="">
+              <b>Data:</b> <span id="outputData"></span>
+            </div>
+          </div>
+      
 
         <!-- Showing story data / @TODO remove in prod. -->
         <section x-show="story.loaded && story.data">
