@@ -1,36 +1,58 @@
-const qrcode = window.qrcode;
+const qrcode2 = window.qrcode;
 
 const video = document.createElement("video");
+const audioDiv = document.getElementById('audioDiv');
+const btnScanQR = document.getElementById("btn-scan-qr");
 const canvasElement = document.getElementById("qr-canvas");
 const canvas = canvasElement.getContext("2d");
 
-const qrResult = document.getElementById("qr-result");
-const outputData = document.getElementById("outputData");
-const btnScanQR = document.getElementById("btn-scan-qr");
-
 let scanning = false;
 
-qrcode.callback = res => {
-  if (res) {
-    outputData.innerText = res;
-    scanning = false;
+qrcode2.callback = res => {
 
-    video.srcObject.getTracks().forEach(track => {
-      track.stop();
-    });
 
-    qrResult.hidden = false;
-    canvasElement.hidden = true;
-    btnScanQR.hidden = false;
+    if (res) { // om res �r true finns det ett h�mtat QR-v�rde
+
+        scanning = false;   
+        video.srcObject.getTracks().forEach(track => {
+            track.stop();
+        });
+        canvasElement.hidden = true;
+        btnScanQR.hidden = false;
+
+
+        $.ajax({    // ajax hade en bra funktion f�r att kolla om en fil finns i en mapp  
+            url: "/ljudfiler/"+res+".mp4",
+            type: 'HEAD',
+            error: function () { // ingen fil hittades med QR-texten, den har skannat fel
+                audioDiv.innerHTML = "";
+                alert("error");
+            },
+            success: function () {  // tjoho! Pumpa ut html-kod med audiofilen och en playknapp
+				 alert("Fungerar");
+                audioDiv.innerHTML ="<div class='audioWrapper'>" +
+                                        "<audio controls id = 'myAudio' > " +
+                                            "<source src = '/ljudfiler/"+res+".mp4' type = 'audio/wav'>" +
+                                        "</audio >" +
+                                        "<button class='playBtn' onclick = 'playAudio()'> Play Audio </button>" +
+                                    "</div>";
+                                   
+                                  
+            }
+        });
   }
+
 };
 
 btnScanQR.onclick = () => {
+	
+
+	
   navigator.mediaDevices
     .getUserMedia({ video: { facingMode: "environment" } })
     .then(function(stream) {
       scanning = true;
-      qrResult.hidden = true;
+
       btnScanQR.hidden = true;
       canvasElement.hidden = false;
       video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen

@@ -1,18 +1,19 @@
-<html lang=”en”>
+﻿<html lang=”en”>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Camera App</title>
     <!-- Link to your main style sheet-->
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    
-    <!-- QR code scanner -->
-    <script src="https://raw.githubusercontent.com/mebjas/html5-qrcode/master/minified/html5-qrcode.min.js"></script>
-    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
-    <script src="qrCodeScanner.js"></script>
 
+    <!-- QR code scanner -->
+
+    <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=0" />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="main.js"></script>
 </head>
 
@@ -21,7 +22,25 @@
     <div class="wrapper">
         <main x-data="state">
 
-        
+		  <div id="container">
+			  <h1>QR Code Scanner</h1>
+
+			  <a id="btn-scan-qr">
+				<img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
+			  <a/>
+
+			  <canvas hidden="" id="qr-canvas"></canvas>			  
+		</div>
+
+          <div id="audioDiv">
+              <!-- Reserverat utrymme för dynamiskt skapad audiofil! / -->
+          </div>
+
+		<script src="qrCodeScanner.js"></script>
+
+		
+		
+			
         <!-- CAMERA OPTION  / -->
         <section x-show="!story.loaded">
             <p>Skanna koden din jävel...</p>
@@ -70,22 +89,6 @@
         </div>
 
         
-        <!-- SECOND SCANNER.... -->
-        <div id="wrapper2">
-            <h1>QR Code Scanner andra testet...</h1>
-      
-            <a id="btn-scan-qr">
-              <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
-            </a>
-      
-            <canvas hidden="" id="qr-canvas"></canvas>
-      
-            <div id="qr-result" hidden="">
-              <b>Data:</b> <span id="outputData"></span>
-            </div>
-          </div>
-      
-
         <!-- Showing story data / @TODO remove in prod. -->
         <section x-show="story.loaded && story.data">
             <h1 x-text="story.data.title"></h1>

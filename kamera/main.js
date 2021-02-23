@@ -1,3 +1,5 @@
+
+
 var state = {
     story: {
         loaded: false,
@@ -31,7 +33,7 @@ console.log(state);
 // @TODO : fix.
 function QRScannerStart() {
     console.log("QR-scanner start " + state);
-    console.log(state)
+    console.log(state);
 
     var resultContainer = document.getElementById('qr-reader-results');
     var lastResult, countResults = 0;
