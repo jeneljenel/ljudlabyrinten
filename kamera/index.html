@@ -15,99 +15,51 @@
     <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="main.js"></script>
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="wrapper">
-        <main x-data="state">
 
-		  <div id="container">
-			  <h1>QR Code Scanner</h1>
+    <main x-data="state">
 
-			  <a id="btn-scan-qr">
-				<img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
-			  <a/>
+        <div id="container">
+            <h1>QR Code Scanner</h1>
 
-			  <canvas hidden="" id="qr-canvas"></canvas>			  
-		</div>
+            <a id="btn-scan-qr">
+                <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
+                <p id="openScanner">Open Qr-Scanner</p>
+             <a />
 
-          <div id="audioDiv">
-              <!-- Reserverat utrymme för dynamiskt skapad audiofil! / -->
-          </div>
-
-		<script src="qrCodeScanner.js"></script>
-
-		
-		
-			
-        <!-- CAMERA OPTION  / -->
-        <section x-show="!story.loaded">
-            <p>Skanna koden din jävel...</p>
-            <button @click="showCamera">Camera Skanner </button>
-            <audio id="myAudio" loop> <!-- @TODO add autoplay-->
-                <source src="sound.wav" type="audio/wav">
-            </audio>
-        </section>
-
-        <!-- Camera -->
-        <div id="camera" x-show="user.showCamera">
-            <!-- FLEX COLUMN -->
-            <!-- Camera sensor -->
-            <div id="reservedSpace">
-                <canvas id="camera--sensor"></canvas>
-                <!-- Camera view -->
-                <video id="camera--view" autoplay playsinline></video>
-            </div>
-            <!-- Camera output -->
-            <img src="//:0" alt="" id="camera--output" class="camOutput">
-
-            <!-- Camera trigger -->
-            <div id="btnWrp" onclick="showWindow()">
-                <button id="camera--trigger" onclick="myFunction()">Take a picture</button>
-            </div>
+                <canvas hidden="" id="qr-canvas"></canvas>
         </div>
 
-
-        <!-- QR SCANNER USER MENU  / -->
-        <section x-show="!story.loaded">
-            <button @click="showQRScanner">QR Scanner första testet.... </button>
-            <audio id="myAudio" loop> <!-- @TODO add autoplay-->
-            <source src="sound.wav" type="audio/wav">
-            </audio> 
-        </section>
-
-        <!-- QR Camera scanner -->
-        <div x-show="user.showQRScanner"> <!-- @TODO -->
-            <audio id="myAudio" loop> <!-- @TODO add autoplay-->
-            <source src="sound.wav" type="audio/wav">
-            </audio> 
-            <h1>DU HAR KLICKAT PÅ QR Code Scanner</h1>
-  
-            <div id="qr-reader" style="width:500px"></div>
-            <div id="qr-reader-results"></div>
+        <div id="audioDiv">
+            <!-- Reserverat utrymme för dynamiskt skapad audiofil! / -->
         </div>
 
-        
-        <!-- Showing story data / @TODO remove in prod. -->
-        <section x-show="story.loaded && story.data">
-            <h1 x-text="story.data.title"></h1>
-        </section>
+        <script src="qrCodeScanner.js"></script>
 
-        <!-- When user has activated a new part of the story -->
-        <div class="wrapper2">
+
+
+
+   
+
+
+        <div class="hearingImpaired">
 
             <section x-data="{ showBox: false }">
 
-                <button @click="showBox = !showBox">Taken picture ( Och visa ljudFilen! )</button>
+                <button id="hearingImpBtn" @click="showBox = !showBox">Läs Texten ( För hörselskadade )</button>
 
                 <div x-show="showBox" class="audioWrapper">
 
-                    <audio controls id="myAudio">
-                        <source src="sound.wav" type="audio/wav">
-                    </audio>
-
-                    <button class="playpause" id="playPause" onclick="playAudio()">Play Audio</button>
+                    <h2>LjudPromenix Station 1</h2>
+                    <p id="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        
                 </div>
 
             </section>
@@ -115,7 +67,7 @@
         </div>
 
     </main>
-    </div>
+
     
 </body>
 </html>

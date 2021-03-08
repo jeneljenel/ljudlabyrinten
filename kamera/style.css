@@ -1,50 +1,54 @@
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+
 html, body {
+
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
+    font-family: 'Open Sans', sans-serif;
+
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
+main{
+    width: 100%;
+    height: auto;
+    position: absolute;  /*F�r att allt inte ska hoppa ned om dynamiskt text sl�ngs in*/
+    top:0;
+}
+
+#text{
+    width: 40%;
+    text-align: justify;
+}
+
+.audioWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.hearingImpaired {
+    margin-top: 100px;
+    text-align: center;
+}
 /* body
 {
   display: flex;
   justify-content: center;
 } */
-
 .welcome image, #starta {
-    display: flex;
-    flex-direction: column;
-      justify-content: center;
-      align-items: center;
 }
 
-.wrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-}
-
-.wrapper2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.audioWrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-/* CAMERA */
-#camera {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 
 #camera--view, #camera--sensor, #camera--output {
       transform: scaleX(-1);
@@ -79,9 +83,7 @@ html, body {
 }
 
 #btnWrp {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  
 }
 
 /* QR SCANNER */
@@ -89,6 +91,25 @@ html, body {
     width: 500px;
 }
 
+
+#hearingImpBtn {
+    border: 2px solid #383838;
+    border-radius: 30px;
+    background: none;
+    padding: 10px 20px;
+    font-size: 25px;
+    cursor: pointer;
+    margin: 10px;
+    color: #383838
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+    opacity: 0.7;
+    transform: scale(1.05);
+}
 /* BUTTONS */
 .playpause {
     border: 4px solid #d343b4;
@@ -115,7 +136,8 @@ html, body {
     margin: 10px;
     width: 150px;
     transition: 0.5s;
-    color: #d343b4
+    color: #d343b4;
+    margin-top: 30px;
 }
 
 /* QR CODE SCANNER */
@@ -138,7 +160,7 @@ h1 {
   
   #container {
     text-align: center;
-    margin: 0;
+    margin-top: 100px;
   }
   
   #qr-canvas {
@@ -154,9 +176,15 @@ h1 {
   #btn-scan-qr img {
     height: 10em;
     padding: 15px;
+    padding-bottom: 0;
     margin: 15px;
     background: white;
   }
+    #openScanner {
+        margin-bottom: 70px;
+        font-weight: bold;
+        font-size: 20.5px;
+    }
   
   #qr-result {
     font-size: 1.2em;

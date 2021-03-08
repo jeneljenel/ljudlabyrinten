@@ -20,25 +20,31 @@ qrcode2.callback = res => {
         canvasElement.hidden = true;
         btnScanQR.hidden = false;
 
-        url =  "kamera/ljudfiler/"+res+".mp4",
+ 
+       
 
         $.ajax({    // ajax hade en bra funktion f�r att kolla om en fil finns i en mapp  
-            type: 'HEAD', 
+            url: res+".mp4",
+            type: 'HEAD',
             error: function () { // ingen fil hittades med QR-texten, den har skannat fel
                 audioDiv.innerHTML = "";
-                alert("error " + res);
+                alert("error: " +res);
             },
             success: function () {  // tjoho! Pumpa ut html-kod med audiofilen och en playknapp
-            alert("Fungerar" + res + " och url: " + url);
-                    audioDiv.innerHTML ="<div class='audioWrapper'>" +
-                                            "<audio controls id = 'myAudio' > " +
-                                                "<source src = "+ url + "type = 'audio/wav'>" +
-                                                "<p>Playing "+ url + "<p>"
-                                            "</audio >" +
-                                            "<button class='playBtn' onclick = 'playAudio()'> Play Audio </button>" +
-                                        "</div>";                    
+                alert("Fungerar");
+
+               
+
+                audioDiv.innerHTML ="<div class='audioWrapper'>" +
+                                        "<audio controls id = 'myAudio' > " +
+                                            "<source src = '"+res+".mp4' type = 'audio/wav'>" +
+                                        "</audio >" +
+                                        "<button class='playBtn' onclick = 'playAudio()'> KOMIGEENDAAAA </button>" +
+                                    "</div>";
+                                   
+                                  
             }
-        })
+        });
   }
 
 };
