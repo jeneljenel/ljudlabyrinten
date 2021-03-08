@@ -20,9 +20,6 @@ qrcode2.callback = res => {
         canvasElement.hidden = true;
         btnScanQR.hidden = false;
 
- 
-       
-
         $.ajax({    // ajax hade en bra funktion f�r att kolla om en fil finns i en mapp  
             url: res+".mp4",
             type: 'HEAD',
