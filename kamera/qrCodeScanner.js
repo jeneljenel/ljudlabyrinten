@@ -8,51 +8,47 @@ const canvas = canvasElement.getContext("2d");
 
 let scanning = false;
 
-qrcode2.callback = res => {
+// qrcode2.no_longer_a_callback = res => {
 
 
-    if (res) { // om res �r true finns det ett h�mtat QR-v�rde
+//     if (res) { // om res �r true finns det ett h�mtat QR-v�rde
 
-        scanning = false;   
-        video.srcObject.getTracks().forEach(track => {
-            track.stop();
-        });
-        canvasElement.hidden = true;
-        btnScanQR.hidden = false;
+//         scanning = false;   
+//         video.srcObject.getTracks().forEach(track => {
+//             track.stop();
+//         });
+//         canvasElement.hidden = true;
+//         btnScanQR.hidden = false;
+   
 
- 
-       
-
-        $.ajax({    // ajax hade en bra funktion f�r att kolla om en fil finns i en mapp  
-            url: res+".mp4",
-            type: 'HEAD',
-            error: function () { // ingen fil hittades med QR-texten, den har skannat fel
-                audioDiv.innerHTML = "";
-                alert("error: " +res);
-            },
-            success: function () {  // tjoho! Pumpa ut html-kod med audiofilen och en playknapp
-                alert("Fungerar");
+//         $.ajax({    // ajax hade en bra funktion f�r att kolla om en fil finns i en mapp  
+//             url: res+".mp4",
+//             type: 'HEAD',
+//             error: function () { // ingen fil hittades med QR-texten, den har skannat fel
+//                 audioDiv.innerHTML = "";
+//                 alert("error: " +res);
+//             },
+//             success: function () {  // tjoho! Pumpa ut html-kod med audiofilen och en playknapp
+//                 // alert("Fungerar");
 
                
 
-                audioDiv.innerHTML ="<div class='audioWrapper'>" +
-                                        "<audio controls id = 'myAudio' > " +
-                                            "<source src = '"+res+".mp4' type = 'audio/wav'>" +
-                                        "</audio >" +
-                                        "<button class='playBtn' onclick = 'playAudio()'> KOMIGEENDAAAA </button>" +
-                                    "</div>";
+//                 audioDiv.innerHTML ="<div class='audioWrapper'>" +
+//                                         "<audio controls id = 'myAudio' > " +
+//                                             "<source src = '"+res+".mp4' type = 'audio/wav'>" +
+//                                         "</audio >" +
+//                                         "<button class='playBtn' onclick = 'playAudio()'> KOMIGEENDAAAA </button>" +
+//                                     "</div>";
                                    
                                   
-            }
-        });
-  }
+//             }
+//         });
+//   }
 
-};
+// };
 
-btnScanQR.onclick = () => {
-	
-
-	
+window.scanQRCode = function(callback) {
+  window.qrcode.callback = callback;
   navigator.mediaDevices
     .getUserMedia({ video: { facingMode: "environment" } })
     .then(function(stream) {

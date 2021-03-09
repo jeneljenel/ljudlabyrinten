@@ -1,137 +1,71 @@
-
-
 var state = {
     story: {
         loaded: false,
+        audioPath: null,
         data: {}
     },
     user: {
         showCamera: false,
         showQRScanner: false,
-        audiosource: false
+        audiosource: false,
+        storiesVisited: [], // array of story ids already visited
+        actsVisited: [], // array of act ids already visited
+        scariness: 1 // 1-3, 3 is terrifying
+    },
+    audio: {
+        audioElement: null,
+        playing: false,
+        playStatus: "gurka"
+    },
+    fakeScan: function() {
+        var story_id = "ljudfil1";
+            this.user.showQRScanner = false;
+            var story = loadStory(story_id);
+            // var audioPath = "/data/audio/" + story_id + "-level-" + this.user.scariness + ".mp4";
+            var audioPath = "ljudfiler/ljudfil1.mp4";
+            this.story.audioPath = audioPath;
+            this.story.data = story;
+            this.story.loaded = true;
     },
     showQRScanner: function () {
-        QRScannerStart();
         this.user.showQRScanner = true;
+        scanQRCode(story_id => {
+            this.user.showQRScanner = false;
+            var story = loadStory(story_id);
+            // var audioPath = "/data/audio/" + story_id + "-level-" + this.user.scariness + ".mp4";
+            var audioPath = "ljudfiler/ljudfil1.mp4";
+            this.story.audioPath = audioPath;
+            this.story.data = story;
+            this.story.loaded = true;
+            var audioElement = loadAudio(audioPath);
+            this.audio.audioElement = audioElement;
+            
+            // load audio
+            // start playing audio
+        });
     },
-
-    showCamera: function () {
-        cameraStart();
-        this.user.showCamera = true;
-    },
-    audiosource: function(){
-        playAudio();
-        this.user.audiosource = true;
+    
+    playPauseAudio: function () {
+        if (this.audio.playing === false) {
+            this.audio.playing = true;
+            this.audio.audioElement.play();
+        } else {
+            this.audio.playing = false;
+            this.audio.audioElement.pause();
     }
-
 };
 
-console.log("START: ");
-console.log(state);
-
-// // QR SCANNER FUNCTION
-// @TODO : fix.
-function QRScannerStart() {
-    console.log("QR-scanner start " + state);
-    console.log(state);
-
-    var resultContainer = document.getElementById('qr-reader-results');
-    var lastResult, countResults = 0;
-    
-    function onScanSuccess(qrCodeMessage) {
-        if (qrCodeMessage !== lastResult) {
-            ++countResults;
-            lastResult = qrCodeMessage;
-            resultContainer.innerHTML 
-                += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
-        }
-    }
-    
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-        "qr-reader", { fps: 10, qrbox: 250 });
-    html5QrcodeScanner.render(onScanSuccess);
-   
+function loadAudio(audioPath) {
+    var x = document.getElementById("myAudio");    
+    return x;
 }
 
-// // // // // // // // // 
-// // CAMERA FUNCTION
-// Access the device camera and stream to cameraView
-function cameraStart() {
-    console.log("camera start! ");
-    console.log(state);
-
-    // Set constraints for the video stream
-    var constraints = { video: { facingMode: "environment" }, audio: false };
-
-    // Define constants
-    const cameraView = document.querySelector("#camera--view"),
-        cameraOutput = document.querySelector("#camera--output"),
-        cameraSensor = document.querySelector("#camera--sensor"),
-        cameraTrigger = document.querySelector("#camera--trigger")
-
-    // Take a picture when cameraTrigger is tapped
-    cameraTrigger.onclick = function() {
-        cameraSensor.width = cameraView.videoWidth;
-        cameraSensor.height = cameraView.videoHeight;
-        cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
-        cameraOutput.src = cameraSensor.toDataURL("image/webp");
-        cameraOutput.classList.add("taken");
-
-        state.story.loaded = true;
-        state.story.data.title = "test titel laddad";
+function loadStory(story_id) {
+    return {
+        id: "story1",
+        act: "1",
+        title: "My title goes here"
     };
-
-    navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then(function(stream) {
-        track = stream.getTracks()[0];
-        cameraView.srcObject = stream;
-    })
-    .catch(function(error) {
-        console.error("Oops. Something is broken.", error);
-    });
-}
-
-
-
-
-var play = false;
-
-function playAudio() {
-           
-        var x = document.getElementById("myAudio");    
-
-        if (play === false) {
-            play = true;
-            x.play();
-            document.getElementById("playPause").innerHTML = "Pause Audio";
-        } else {
-            play = false;
-            x.pause();
-            document.getElementById("playPause").innerHTML = "Play Audio";
-            }
-}
-
-
-
-
-
-
-
-function showWindow() {
-    if (document.getElementById("camera--output").style.visibility === "visible") {
-        alert("CLICKI-TAKE-A-PIC!");
-    }
-  
-    document.getElementById("camera--output").style.visibility = "visible";
-}
-
-function setStoryTrue() {
-
- 
-
-    state.story.loaded = true;
-    state.story.data =  {title: "test titel laddad"};
 }
 
 window.state = state;
