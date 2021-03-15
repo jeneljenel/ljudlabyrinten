@@ -53,7 +53,9 @@ var state = {
             this.audio.playing = false;
             this.audio.audioElement.pause();
     }
-};
+}
+
+}
 
 function loadAudio(audioPath) {
     var x = document.getElementById("myAudio");    
