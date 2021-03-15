@@ -11,7 +11,7 @@ let scanning = false;
 // qrcode2.no_longer_a_callback = res => {
 
 
-//     if (res) { // om res �r true finns det ett h�mtat QR-v�rde
+//   p  if (res) { // om res �r true finns det ett h�mtat QR-v�rde
 
 //         scanning = false;   
 //         video.srcObject.getTracks().forEach(track => {

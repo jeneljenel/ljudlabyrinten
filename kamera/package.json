@@ -1,16 +1,17 @@
 {
-  "name": "qr-code-scanner",
-  "version": "1.0.0",
+  "name": "ljudlabyrinten",
+  "version": "0.0.1",
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "start": "webpack serve",
+    "build": "webpack"
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "7.2.0",
-    "parcel-bundler": "^1.6.1"
+    "webpack": "^5.25.1",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "keywords": []
 }
