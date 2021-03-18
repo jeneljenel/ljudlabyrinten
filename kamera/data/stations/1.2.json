@@ -1,0 +1,9 @@
+{
+    "station_id": "1.2",
+    "act_id": "1",
+    "type": "plotpoint", 
+    "toStations": [
+        "1.1",
+        "1.3"
+    ]
+}
