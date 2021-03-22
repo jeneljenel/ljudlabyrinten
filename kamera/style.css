@@ -4,6 +4,10 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
     border: 0;
 }
 
+h1{
+font-family: sans-serif;
+}
+
 
 html, body {
 
