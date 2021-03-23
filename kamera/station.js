@@ -52,7 +52,9 @@ let stationLogic = {
                 interpretTrigger(user, trigger);
             }
         });
-        // TODO: add tags to user
+        // TODO: add tags to user from station.tags
+        user.tags.push("fnurk")
+        user.tags.push("foo")
     }
 }
 

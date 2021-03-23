@@ -55,6 +55,7 @@
             </section>
         </div>
 
+        <div x-text="user.tags"></div>
         <form @submit.prevent="fakeScan(fakeId)">
         <input type="text" x-model="fakeId" />
         <button >fake</button>
