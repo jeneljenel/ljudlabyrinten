@@ -37,8 +37,7 @@
              <canvas x-show="user.showQRScanner" hidden="" id="qr-canvas"></canvas>
         </div>
         <script src="qrCodeScanner.js"></script>
-        
-
+    
         <div x-show="story.loaded" id="audioDiv">
             <h1 x-text="story.audioPath"></h1>
 
@@ -68,8 +67,6 @@
 
         </div>
 
-    
-        
         <form @submit.prevent="fakeScan(fakeId)">
         <input type="text" x-model="fakeId" />
         <button >fake</button>
