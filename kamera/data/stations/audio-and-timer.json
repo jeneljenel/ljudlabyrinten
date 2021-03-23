@@ -1,0 +1,22 @@
+{
+    "id": "audio-and-timer",
+    "name": "Audio och timer, änna",
+    "tags": [],
+    "triggers": [
+        {
+            "condition": "hasTag",
+            "conditionArgs": "adventurer",
+            "trigger": "playAudio",
+            "audioType": "story",
+            "audioFilename": "adventure1.mp4"
+        },
+        {
+            "condition": "hasTag",
+            "conditionArgs": "adventurer",
+            "trigger": "startTimeLimit",
+            "timeLimit": 240,
+            "timeLimitFailure": "goToStation",
+            "timeLimitFailureArgs": "adventure-failed-1"
+        }
+    ]
+}

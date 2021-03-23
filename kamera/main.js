@@ -1,3 +1,69 @@
+/*
+    Användaren:
+        - Typ av användare (äventyrlig/klurig/engelsman)
+        - Platser den redan varit
+        - Val som har gjorts (koder som skannats, kanske samma som platser den varit)
+
+    Station:
+        - Ljud ska troligen spelas upp
+        - En eller flera timers kan startas och när den går ut händer NÅNTING
+        - Spara värden för senare bruk
+        - Deaktivera andra stationer
+        - Aktivera andra stationer
+        - Byta akt
+        - Sätta ett tema (påverka musik och stämning)
+
+    {
+        id: "spoket-under-rulltrappan",
+        name: "Spöket under rulltrappan",
+        tags: [
+            "danger",
+            "puzzle"
+        ],
+        triggers: [
+            // use-case, play simple audio
+            {
+                trigger: "playAudio",
+                audioType: "story", // story|background
+                audioFilename: "simpleaudio1.mp4"
+            }
+            
+            // use-case, play different audio by player type
+            {
+                condition: "hasTag",
+                conditionArgs: "adventurer",
+                trigger: "playAudio",
+                audioType: "story", // story|background
+                audioFilename: "adventure1.mp4"
+            },
+            {
+                condition: "hasTag",
+                conditionArgs: "puzzler",
+                trigger: "playAudio",
+                audioType: "story", // story|background
+                audioFilename: "puzzler1.mp4"
+            },
+            
+            // use-case, play audio AND set timer for adventurers
+            {
+                condition: "hasTag",
+                conditionArgs: "adventurer",
+                trigger: "playAudio",
+                audioType: "story", // story|background
+                audioFilename: "adventure1.mp4"
+            },
+            {
+                condition: "hasTag",
+                conditionArgs: "adventurer",
+                trigger: "startTimeLimit",
+                timeLimit: 240,
+                timeLimitFailure: "goToStation",
+                timeLimitFailureArgs: "adventure-failed-1",
+            },
+        ]
+    }
+
+*/
 var state = {
     story: {
         loaded: false,
@@ -9,14 +75,15 @@ var state = {
         showQRScanner: false,
         audiosource: false,
         stationsVisited: [], // array of story ids already visited
-        scariness: 1 // 1-3, 3 is terrifying
+        scariness: 1, // 1-3, 3 is terrifying
+        tags: []
     },
     audio: {
         audioElement: null,
         playing: false,
         playStatus: "gurka"
     },
-    fakeId: "1",
+    fakeId: "play-simple-audio",
     
     init: function () {
         var audioElement = getAudio();
@@ -38,31 +105,10 @@ var state = {
     
     tryStory: function (story_id) {
         var story = loadStory(story_id, storyData => {
-            if (
-                // Are we on the first station? Allow station 1 specifically
-                (this.story.data.station_id === undefined && storyData.station_id == "1") ||
-                // Otherwise, check if this station is allowed in current story
-                (this.story.data.toStations.includes(storyData.station_id))
-                ) {
-                this.user.stationsVisited.push(storyData);
-                this.user.showQRScanner = false;
-                var audioPath = "/data/audio/" + story_id + "-level-" + this.user.scariness + ".mp4";
-                this.story.audioPath = audioPath;
-                this.story.data = storyData;
-                this.story.loaded = true;
-                var audioElement = getAudio();
-                var source = getSource();
-                source.src = audioPath;
-                audioElement.load();
-            } else {
-                // TODO: Complain at user about their crappy scanning
-                // only update this.story.audioPath
-                console.log("illegal move");
-            }
+            window.Station.interpretStation(this.user, storyData);
         });
     },
 
-    
     playPauseAudio: function () {
         if (this.audio.playing === false) {
             this.audio.playing = true;
@@ -70,9 +116,8 @@ var state = {
         } else {
             this.audio.playing = false;
             this.audio.audioElement.pause();
+        }
     }
-}
-
 }
 
 function getAudio() {

@@ -71,7 +71,6 @@ function tick() {
 
   scanning && requestAnimationFrame(tick);
 }
-
 function scan() {
   try {
     qrcode.decode();

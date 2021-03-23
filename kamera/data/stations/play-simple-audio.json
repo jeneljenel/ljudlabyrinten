@@ -1,0 +1,13 @@
+{
+    "id": "play-simple-audio",
+    "name": "Playing simple audio",
+    "tags": [],
+    "triggers": [ 
+        {
+            "station_id": "2",
+            "trigger": "playAudio",
+            "audioType": "story", 
+            "audioFilename": "simpleaudio1.mp4"
+        }
+    ]
+}

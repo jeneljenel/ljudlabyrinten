@@ -14,6 +14,7 @@
     <!-- <link rel="stylesheet" href="src/styles.css" /> -->
     <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="station.js"></script>
     <script src="main.js"></script>
 
 
@@ -23,24 +24,19 @@
 
 <body>
 
-
     <main x-data="state" x-init="init()">
-
         <div id="container">
             <h1>Låt äventyret börja!</h1>
-
             <a id="btn-scan-qr" @click="showQRScanner">
-                <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
+                <img src="/data/camera.png">
                 <p id="openScanner">Tryck för att starta</p>
-             <a />
-
+            </a>
              <canvas x-show="user.showQRScanner" hidden="" id="qr-canvas"></canvas>
         </div>
         <script src="qrCodeScanner.js"></script>
     
         <div x-show="story.loaded" id="audioDiv">
             <h1 x-text="story.audioPath"></h1>
-
             <div class='audioWrapper'>
                 <audio controls id='audioPlayer' >
                     <source id="audioSource" src="" type='audio/wav'>
@@ -49,22 +45,14 @@
             </div>
         </div>
 
-
         <div class="hearingImpaired">
-
             <section x-data="{ showBox: false }">
-
                 <button id="hearingImpBtn" @click="showBox = !showBox">Läs Texten ( För hörselskadade )</button>
-
                 <div x-show="showBox" class="audioWrapper">
-
                     <h2>LjudPromenix Station 1</h2>
                     <p id="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        
                 </div>
-
             </section>
-
         </div>
 
         <form @submit.prevent="fakeScan(fakeId)">
