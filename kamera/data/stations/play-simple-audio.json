@@ -1,7 +1,7 @@
 {
     "id": "play-simple-audio",
     "name": "Playing simple audio",
-    "tags": [],
+    "tags": ["simple", "audio"],
     "triggers": [ 
         {
             "station_id": "2",
