@@ -53,8 +53,9 @@ let stationLogic = {
             }
         });
         // TODO: add tags to user from station.tags
-        user.tags.push("fnurk")
-        user.tags.push("foo")
+        station.tags.forEach(tag => {
+            user.tags.push(tag)
+        })
     }
 }
 
