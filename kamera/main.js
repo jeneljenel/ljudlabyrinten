@@ -103,10 +103,18 @@ var state = {
         });
     },
     
-    tryStory: function (story_id) {
+    tryStory: function (story_id, optionalUser) {
+        let user = this.user;
+        if (optionalUser !== undefined) {
+            user = optionalUser;
+        }
         var story = loadStory(story_id, storyData => {
-            window.Station.interpretStation(this.user, storyData);
+            window.Station.interpretStation(user, storyData);
         });
+    },
+    
+    withUser: function (callback) {
+        callback(this.user);
     },
 
     playPauseAudio: function () {
@@ -119,6 +127,10 @@ var state = {
         }
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    window.initQR();
+});
 
 function getAudio() {
     return document.getElementById("audioPlayer");    

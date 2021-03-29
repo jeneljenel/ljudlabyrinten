@@ -15,8 +15,8 @@
     <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="station.js"></script>
+    <script src="qrCodeScanner.js"></script>
     <script src="main.js"></script>
-
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -33,7 +33,6 @@
             </a>
              <canvas x-show="user.showQRScanner" hidden="" id="qr-canvas"></canvas>
         </div>
-        <script src="qrCodeScanner.js"></script>
     
         <div x-show="story.loaded" id="audioDiv">
             <h1 x-text="story.audioPath"></h1>
@@ -56,9 +55,10 @@
         </div>
 
         <div x-text="user.tags"></div>
-        <form @submit.prevent="fakeScan(fakeId)">
-        <input type="text" x-model="fakeId" />
-        <button >fake</button>
+
+        <form class="devhelper" @submit.prevent="fakeScan(fakeId)">
+            <input type="text" x-model="fakeId" />
+            <button>fake</button>
         </form>
 
     </main>

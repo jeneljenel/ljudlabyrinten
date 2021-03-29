@@ -1,7 +1,7 @@
 {
     "id": "audio-and-timer",
     "name": "Audio och timer, änna",
-    "tags": [],
+    "tags": ["audio", "timer"],
     "triggers": [
         {
             "condition": "hasTag",
@@ -11,12 +11,12 @@
             "audioFilename": "adventure1.mp4"
         },
         {
-            "condition": "hasTag",
-            "conditionArgs": "adventurer",
             "trigger": "startTimeLimit",
-            "timeLimit": 240,
-            "timeLimitFailure": "goToStation",
-            "timeLimitFailureArgs": "adventure-failed-1"
+            "timeLimit": 5,
+            "timeLimitEnd": {
+                "trigger": "goToStation",
+                "toStation": "play-simple-audio"
+            }
         }
     ]
 }

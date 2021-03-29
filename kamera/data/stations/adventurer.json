@@ -1,0 +1,13 @@
+{
+    "id": "adventurer",
+    "name": "Giving you the tag adventurer",
+    "tags": ["adventurer"],
+    "triggers": [ 
+        {
+            "station_id": "2",
+            "trigger": "playAudio",
+            "audioType": "story", 
+            "audioFilename": "simpleaudio1.mp4"
+        }
+    ]
+}
