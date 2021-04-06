@@ -1,0 +1,419 @@
+@charset "UTF-8";
+@keyframes typed {
+  /* string 1, char 1 */
+  0%, 0.644994832% {
+    content: "L";
+  }
+  /* string 1, char 2 */
+  0.645994832%, 1.2909896641% {
+    content: "Lj";
+  }
+  /* string 1, char 3 */
+  1.2919896641%, 1.9369844961% {
+    content: "Lju";
+  }
+  /* string 1, char 4 */
+  1.9379844961%, 2.5829793282% {
+    content: "Ljud";
+  }
+  /* string 1, char 5 */
+  2.5839793282%, 3.2289741602% {
+    content: "Ljudl";
+  }
+  /* string 1, char 6 */
+  3.2299741602%, 3.8749689922% {
+    content: "Ljudla";
+  }
+  /* string 1, char 7 */
+  3.8759689922%, 4.5209638243% {
+    content: "Ljudlab";
+  }
+  /* string 1, char 8 */
+  4.5219638243%, 5.1669586563% {
+    content: "Ljudlaby";
+  }
+  /* string 1, char 9 */
+  5.1679586563%, 5.8129534884% {
+    content: "Ljudlabyr";
+  }
+  /* string 1, char 10 */
+  5.8139534884%, 6.4589483204% {
+    content: "Ljudlabyri";
+  }
+  /* string 1, char 11 */
+  6.4599483204%, 7.1049431525% {
+    content: "Ljudlabyrin";
+  }
+  /* string 1, char 12 */
+  7.1059431525%, 7.7509379845% {
+    content: "Ljudlabyrint";
+  }
+  /* string 1, char 13 */
+  7.7519379845%, 8.3969328165% {
+    content: "Ljudlabyrinte";
+  }
+  /* string 1, char 14 */
+  8.3979328165%, 9.0429276486% {
+    content: "Ljudlabyrinten";
+  }
+  /* string 1, char 15 */
+  9.0439276486%, 23.1256149871% {
+    content: "Ljudlabyrinten!";
+  }
+  /* string 1, char 16 */
+  23.1266149871%, 23.6424108527% {
+    content: "Ljudlabyrinten";
+  }
+  /* string 1, char 17 */
+  23.6434108527%, 24.1592067183% {
+    content: "Ljudlabyrinte";
+  }
+  /* string 1, char 18 */
+  24.1602067183%, 24.676002584% {
+    content: "Ljudlabyrint";
+  }
+  /* string 1, char 19 */
+  24.677002584%, 25.1927984496% {
+    content: "Ljudlabyrin";
+  }
+  /* string 1, char 20 */
+  25.1937984496%, 25.7095943152% {
+    content: "Ljudlabyri";
+  }
+  /* string 1, char 21 */
+  25.7105943152%, 26.2263901809% {
+    content: "Ljudlabyr";
+  }
+  /* string 1, char 22 */
+  26.2273901809%, 26.7431860465% {
+    content: "Ljudlaby";
+  }
+  /* string 1, char 23 */
+  26.7441860465%, 27.2599819121% {
+    content: "Ljudlab";
+  }
+  /* string 1, char 24 */
+  27.2609819121%, 27.7767777778% {
+    content: "Ljudla";
+  }
+  /* string 1, char 25 */
+  27.7777777778%, 28.2935736434% {
+    content: "Ljudl";
+  }
+  /* string 1, char 26 */
+  28.2945736434%, 28.810369509% {
+    content: "Ljud";
+  }
+  /* string 1, char 27 */
+  28.811369509%, 29.3271653747% {
+    content: "Lju";
+  }
+  /* string 1, char 28 */
+  29.3281653747%, 29.8439612403% {
+    content: "Lj";
+  }
+  /* string 1, char 29 */
+  29.8449612403%, 30.3607571059% {
+    content: "L";
+  }
+  /* string 1, char 30 */
+  30.3617571059%, 36.8207054264% {
+    content: "​";
+  }
+  /* string 2, char 1 */
+  36.8217054264%, 37.4667002584% {
+    content: "J";
+  }
+  /* string 2, char 2 */
+  37.4677002584%, 38.1126950904% {
+    content: "Jä";
+  }
+  /* string 2, char 3 */
+  38.1136950904%, 38.7586899225% {
+    content: "Jät";
+  }
+  /* string 2, char 4 */
+  38.7596899225%, 39.4046847545% {
+    content: "Jätt";
+  }
+  /* string 2, char 5 */
+  39.4056847545%, 40.0506795866% {
+    content: "Jätte";
+  }
+  /* string 2, char 6 */
+  40.0516795866%, 40.6966744186% {
+    content: "Jätte ";
+  }
+  /* string 2, char 7 */
+  40.6976744186%, 41.3426692506% {
+    content: "Jätte l";
+  }
+  /* string 2, char 8 */
+  41.3436692506%, 41.9886640827% {
+    content: "Jätte lä";
+  }
+  /* string 2, char 9 */
+  41.9896640827%, 42.6346589147% {
+    content: "Jätte läs";
+  }
+  /* string 2, char 10 */
+  42.6356589147%, 43.2806537468% {
+    content: "Jätte läsk";
+  }
+  /* string 2, char 11 */
+  43.2816537468%, 43.9266485788% {
+    content: "Jätte läski";
+  }
+  /* string 2, char 12 */
+  43.9276485788%, 44.5726434109% {
+    content: "Jätte läskig";
+  }
+  /* string 2, char 13 */
+  44.5736434109%, 45.2186382429% {
+    content: "Jätte läskig ";
+  }
+  /* string 2, char 14 */
+  45.2196382429%, 59.3013255814% {
+    content: "Jätte läskig 😱";
+  }
+  /* string 2, char 15 */
+  59.3023255814%, 59.818121447% {
+    content: "Jätte läskig ";
+  }
+  /* string 2, char 16 */
+  59.819121447%, 60.3349173127% {
+    content: "Jätte läskig";
+  }
+  /* string 2, char 17 */
+  60.3359173127%, 60.8517131783% {
+    content: "Jätte läski";
+  }
+  /* string 2, char 18 */
+  60.8527131783%, 61.3685090439% {
+    content: "Jätte läsk";
+  }
+  /* string 2, char 19 */
+  61.3695090439%, 61.8853049096% {
+    content: "Jätte läs";
+  }
+  /* string 2, char 20 */
+  61.8863049096%, 62.4021007752% {
+    content: "Jätte lä";
+  }
+  /* string 2, char 21 */
+  62.4031007752%, 62.9188966408% {
+    content: "Jätte l";
+  }
+  /* string 2, char 22 */
+  62.9198966408%, 63.4356925065% {
+    content: "Jätte ";
+  }
+  /* string 2, char 23 */
+  63.4366925065%, 63.9524883721% {
+    content: "Jätte";
+  }
+  /* string 2, char 24 */
+  63.9534883721%, 64.4692842377% {
+    content: "Jätt";
+  }
+  /* string 2, char 25 */
+  64.4702842377%, 64.9860801034% {
+    content: "Jät";
+  }
+  /* string 2, char 26 */
+  64.9870801034%, 65.502875969% {
+    content: "Jä";
+  }
+  /* string 2, char 27 */
+  65.503875969%, 66.0196718346% {
+    content: "J";
+  }
+  /* string 2, char 28 */
+  66.0206718346%, 72.479620155% {
+    content: "​";
+  }
+  /* string 3, char 1 */
+  72.480620155%, 73.1256149871% {
+    content: "D";
+  }
+  /* string 3, char 2 */
+  73.1266149871%, 73.7716098191% {
+    content: "Dr";
+  }
+  /* string 3, char 3 */
+  73.7726098191%, 74.4176046512% {
+    content: "Dri";
+  }
+  /* string 3, char 4 */
+  74.4186046512%, 75.0635994832% {
+    content: "Dric";
+  }
+  /* string 3, char 5 */
+  75.0645994832%, 75.7095943152% {
+    content: "Drick";
+  }
+  /* string 3, char 6 */
+  75.7105943152%, 76.3555891473% {
+    content: "Drick ";
+  }
+  /* string 3, char 7 */
+  76.3565891473%, 90.4382764858% {
+    content: "Drick ☕";
+  }
+  /* string 3, char 8 */
+  90.4392764858%, 90.9550723514% {
+    content: "Drick ";
+  }
+  /* string 3, char 9 */
+  90.9560723514%, 91.4718682171% {
+    content: "Drick";
+  }
+  /* string 3, char 10 */
+  91.4728682171%, 91.9886640827% {
+    content: "Dric";
+  }
+  /* string 3, char 11 */
+  91.9896640827%, 92.5054599483% {
+    content: "Dri";
+  }
+  /* string 3, char 12 */
+  92.5064599483%, 93.022255814% {
+    content: "Dr";
+  }
+  /* string 3, char 13 */
+  93.023255814%, 93.5390516796% {
+    content: "D";
+  }
+  /* string 3, char 14 */
+  93.5400516796%, 100% {
+    content: "​";
+  }
+}
+@keyframes beam-blink {
+  75% {
+    border-color: transparent;
+  }
+}
+* {
+  backface-visibility: hidden;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.125), rgba(255, 255, 255, 0)), linear-gradient(to bottom, #000, #000 2px, #111 3px);
+  background-repeat: repeat-y;
+  background-position: center center;
+  background-size: cover, 100% 3px;
+  font-size: calc(10px + 2vw);
+  font-family: "VT323", monospace, sans-serif;
+  color: #3f3;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body::after {
+  content: "​";
+  position: relative;
+  top: -13px;
+  display: inline-block;
+  padding-right: 3px;
+  padding-right: calc(3px + 0.1vw);
+  border-right: 10px solid rgba(51, 255, 51, 0.75);
+  border-right: calc(1.1vw + 4px) solid rgba(51, 255, 51, 0.75);
+  text-shadow: 0 0 5px rgba(51, 255, 51, 0.75);
+  white-space: nowrap;
+  animation: typed 15.48s linear 1s infinite, beam-blink 1s infinite;
+}
+@media (max-width: 575px) {
+  body::after {
+    top: -33px;
+  }
+}
+
+
+.final__animation-bar-1 {
+    position: relative;
+    display: block;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 16px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+  }
+  .final__animation-bar-1 span {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    height: 20px;
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
+    background-color: #a6eb08;
+    background-size: 100%;
+    background-image: linear-gradient(to bottom, #0d744c, #0e7c40);
+    animation: progress-anim-1 5s infinite linear;
+  }
+  .final__animation-bar-1 span:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    background-size: 100%;
+    background-image: linear-gradient(45deg, #ffffff 25%,
+                                     rgba(0, 0, 0, 0) 25%,
+                                     rgba(0, 0, 0, 0) 50%,
+                                     #ffffff 50%,
+                                     #ffffff 75%,
+                                     rgba(0, 0, 0, 0) 75%,
+                                     rgba(0, 0, 0, 0));
+    background-size: 30px 30px;
+    opacity: 0.3;
+    animation: progress-anim-1-after 0.5s infinite linear;
+  }
+
+  @keyframes progress-anim-1 {
+    0% {
+      width: 20%;
+    }
+    100% {
+      width: 100%;
+    }
+    
+  }
+ 
+
+   .wrapper{
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;   
+}
+
+img {
+    transform: scaleX(1);
+    animation-name: fly;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    animation-iteration-count: 3;
+    animation-timing-function: linear;
+    top: -40px;
+  
+}
+
+@keyframes fly{
+    from{ transform: translateX(-450px);}
+    to{ transform: translateX(1300px);}
+}
+
+
+ .hejsvejs{
+  width: 80%;
+}
