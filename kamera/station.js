@@ -20,9 +20,9 @@ let conditions = {
 let triggers = {
     "playAudio": function (user, trigger) {
         console.log("play audio", trigger);
-        // TODO: Add audio playing
-        
-        
+        console.log("spela: ", trigger.station_id);
+        audio = new Audio("data/audio/" + trigger.audioFilename);
+        audio.play();   
     },
     "startTimeLimit": function (user, trigger) {
         console.log("starting timer");
