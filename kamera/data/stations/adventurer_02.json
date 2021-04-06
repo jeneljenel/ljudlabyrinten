@@ -1,0 +1,13 @@
+{
+    "id": "adventurer",
+    "name": "Second story to the adventurer",
+    "tags": ["adventurer", "second"],
+    "triggers": [ 
+        {
+            "station_id": "2",
+            "trigger": "playAudio",
+            "audioType": "story", 
+            "audioFilename": "adventurerer_02.mp3"
+        }
+    ]
+}

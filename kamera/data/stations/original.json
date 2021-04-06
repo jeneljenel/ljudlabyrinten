@@ -1,0 +1,13 @@
+{
+    "id": "original",
+    "name": "Giving you the tag original",
+    "tags": ["original"],
+    "triggers": [ 
+        {
+            "station_id": "1",
+            "trigger": "playAudio",
+            "audioType": "story", 
+            "audioFilename": "original_intro.mp4"
+        }
+    ]
+}

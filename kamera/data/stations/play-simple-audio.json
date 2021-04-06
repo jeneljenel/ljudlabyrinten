@@ -1,13 +1,13 @@
 {
     "id": "play-simple-audio",
-    "name": "Playing simple audio",
+    "name": "Playing simple Laban audio - for test",
     "tags": ["simple", "audio"],
     "triggers": [ 
         {
-            "station_id": "2",
+            "station_id": "1",
             "trigger": "playAudio",
             "audioType": "story", 
-            "audioFilename": "simpleaudio1.mp4"
+            "audioFilename": "play-simple-audio.mp4"
         }
     ]
 }
