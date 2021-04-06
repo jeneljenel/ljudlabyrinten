@@ -382,7 +382,7 @@ body::after {
 
   @keyframes progress-anim-1 {
     0% {
-      width: 20%;
+      width: 0%;
     }
     100% {
       width: 100%;
@@ -390,9 +390,8 @@ body::after {
     
   }
  
-
    .wrapper{
-    width: 50%;
+    width: 10%;
     padding: 20px;
     box-sizing: border-box;   
 }
@@ -400,7 +399,7 @@ body::after {
 img {
     transform: scaleX(1);
     animation-name: fly;
-    animation-duration: 3s;
+    animation-duration: 5s;
     animation-fill-mode: both;
     animation-iteration-count: 3;
     animation-timing-function: linear;
@@ -409,8 +408,8 @@ img {
 }
 
 @keyframes fly{
-    from{ transform: translateX(-450px);}
-    to{ transform: translateX(1300px);}
+    from{ transform: translateX(-550px);}
+    to{ transform: translateX(550px);}
 }
 
 
