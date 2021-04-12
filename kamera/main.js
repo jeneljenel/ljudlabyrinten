@@ -13,6 +13,9 @@
         - Byta akt
         - Sätta ett tema (påverka musik och stämning)
 
+    data/audio
+        - Type: vissa sortes ljudspår ska kunna avbrytas såsom bakgrundsljud. Men användaren ska inte avbryta en story? 
+
     {
         id: "spoket-under-rulltrappan",
         name: "Spöket under rulltrappan",
@@ -66,8 +69,7 @@
 */
 var state = {
     story: {
-        loaded: false,
-        audioPath: null,
+        isPlaying: false,
         data: {}
     },
     user: {
@@ -79,17 +81,20 @@ var state = {
         tags: []
     },
     audio: {
-        audioElement: null,
-        playing: false,
-        playStatus: "gurka"
+        track: {
+            story: null,
+            music: null,
+            message: null,
+            effect: null
+        },
     },
-    fakeId: "play-simple-audio",
+    fakeId: "audio-and-timer",
     
     init: function () {
-        var audioElement = getAudio();
-        audioElement.addEventListener('canplaythrough', event => {
-            audioElement.play();
-        });
+        // var audioElement = getAudio();
+        // audioElement.addEventListener('canplaythrough', event => {
+        //     audioElement.play();
+        // });
     },
     
     fakeScan: function(story_id) {
@@ -117,14 +122,35 @@ var state = {
         callback(this.user);
     },
 
-    playPauseAudio: function () {
-        if (this.audio.playing === false) {
-            this.audio.playing = true;
-            this.audio.audioElement.play();
-        } else {
-            this.audio.playing = false;
-            this.audio.audioElement.pause();
+    // playPauseAudio: function () {
+    //     if (this.audio.playing === false) {
+    //         this.audio.playing = true;
+    //         this.audio.audioElement.play();
+    //     } else {
+    //         this.audio.playing = false;
+    //         this.audio.audioElement.pause();
+    //     }
+    // },
+
+    playAudio: function (filepath, type) {
+        if (this.audio.track[type] !== null) {
+            this.audio.track[type].pause();
         }
+        audio = new Audio("data/audio/" + filepath);
+        this.audio.track[type] = audio;
+        this.audio.track[type].play();
+        if (type == "story") {
+            this.story.isPlaying = true;
+            this.audio.track[type].addEventListener("ended", event => {
+                console.log("Ended")
+                window.state.storyAudioEnded();
+            });
+        }
+    },
+
+    storyAudioEnded: function () {
+        // TODO: This is not behaving with Alpine right now
+        this.story.isPlaying = false;
     }
 }
 

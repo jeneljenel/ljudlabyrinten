@@ -9,7 +9,7 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family:;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex; 
   justify-content: center;
   align-items: center;
@@ -46,6 +46,12 @@ button, input[type=button], input[type=submit], a.button {
 }
 
 .devhelper {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.devhelper-tags {
   position: absolute;
   top: 8px;
   left: 8px;

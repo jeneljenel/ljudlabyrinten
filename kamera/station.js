@@ -21,13 +21,11 @@ let triggers = {
     "playAudio": function (user, trigger) {
         console.log("play audio", trigger);
         console.log("spela: ", trigger.station_id);
-        audio = new Audio("data/audio/" + trigger.audioFilename);
-        audio.play();   
+        window.state.playAudio(trigger.audioFilename, trigger.audioType);
     },
     "startTimeLimit": function (user, trigger) {
         console.log("starting timer");
         window.setTimeout(function () {
-            // TODO: Connect this back to Alpine so goToStation works right with tags
             interpretTrigger(user, trigger.timeLimitEnd);
         }, trigger.timeLimit * 1000);
     },

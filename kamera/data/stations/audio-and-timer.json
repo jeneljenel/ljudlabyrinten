@@ -8,7 +8,7 @@
             "conditionArgs": "adventurer",
             "trigger": "playAudio",
             "audioType": "story",
-            "audioFilename": "adventure1.mp4"
+            "audioFilename": "Adventure1.mp4"
         },
         {
             "trigger": "startTimeLimit",
