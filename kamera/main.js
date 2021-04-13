@@ -122,16 +122,6 @@ var state = {
         callback(this.user);
     },
 
-    // playPauseAudio: function () {
-    //     if (this.audio.playing === false) {
-    //         this.audio.playing = true;
-    //         this.audio.audioElement.play();
-    //     } else {
-    //         this.audio.playing = false;
-    //         this.audio.audioElement.pause();
-    //     }
-    // },
-
     playAudio: function (filepath, type) {
         if (this.audio.track[type] !== null) {
             this.audio.track[type].pause();
@@ -139,6 +129,7 @@ var state = {
         audio = new Audio("data/audio/" + filepath);
         this.audio.track[type] = audio;
         this.audio.track[type].play();
+        // Handle story type; do not interupt a story
         if (type == "story") {
             this.story.isPlaying = true;
             this.audio.track[type].addEventListener("ended", event => {
@@ -151,6 +142,8 @@ var state = {
     storyAudioEnded: function () {
         // TODO: This is not behaving with Alpine right now
         this.story.isPlaying = false;
+        console.log(this.story.isPlaying);
+
     }
 }
 
