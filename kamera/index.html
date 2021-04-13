@@ -34,16 +34,15 @@
             </a>
              <canvas x-show="user.showQRScanner" hidden="" id="qr-canvas"></canvas>
         </div>
-    
-        <!-- <div x-show="story.loaded" id="audioDiv">
-            <h1 x-text="story.audioPath"></h1>
-            <div class='audioWrapper'>
-                <audio controls id='audioPlayer' >
-                    <source id="audioSource" src="" type='audio/wav'>
-                </audio>
-                <button class='playBtn' @click="playPauseAudio" x-text="audio.playStatus"></button>
-            </div>
-        </div> -->
+
+        <div x-text="user.tags"></div>
+        <div x-text="story.isPlaying"></div>
+
+        <form class="devhelper" @submit.prevent="fakeScan(fakeId)">
+            <input type="text" x-model="fakeId" />
+            <button>fake</button>
+        </form>
+
         <!-- 
         <div class="hearingImpaired">
             <section x-data="{ showBox: false }">
@@ -54,15 +53,6 @@
                 </div>
             </section>
         </div> -->
-
-        <div x-text="user.tags"></div>
-        <div x-text="story.isPlaying"></div>
-
-        <form class="devhelper" @submit.prevent="fakeScan(fakeId)">
-            <input type="text" x-model="fakeId" />
-            <button>fake</button>
-        </form>
-
     </main>
 
     
