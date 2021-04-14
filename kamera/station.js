@@ -19,8 +19,8 @@ let conditions = {
 
 let triggers = {
     "playAudio": function (user, trigger) {
-        console.log("play audio", trigger);
-        console.log("spela: ", trigger.station_id);
+        console.log("play audio because trigger: ", trigger);
+
         window.state.playAudio(trigger.audioFilename, trigger.audioType);
     },
     "startTimeLimit": function (user, trigger) {

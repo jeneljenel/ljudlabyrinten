@@ -85,7 +85,8 @@ var state = {
             story: null,
             music: null,
             message: null,
-            effect: null
+            effect: null,
+            help: null,
         },
     },
     fakeId: "audio-and-timer",
@@ -126,12 +127,19 @@ var state = {
         if (this.audio.track[type] !== null) {
             this.audio.track[type].pause();
         }
-        audio = new Audio("data/audio/" + filepath);
-        this.audio.track[type] = audio;
-        this.audio.track[type].play();
-        // Handle story type; do not interupt a story
+        isPlaying = this.story.isPlaying;
+
+        if (isPlaying == false) {
+            console.log("story isPlaying value: ", isPlaying);
+            audio = new Audio("data/audio/" + filepath);
+            this.audio.track[type] = audio;
+            this.audio.track[type].play();
+        }
+
         if (type == "story") {
+            // TODO: This is not behaving with Alpine right now
             this.story.isPlaying = true;
+            console.log("story isPlaying value should be set to true: ", isPlaying)
             this.audio.track[type].addEventListener("ended", event => {
                 console.log("Ended")
                 window.state.storyAudioEnded();
@@ -142,8 +150,7 @@ var state = {
     storyAudioEnded: function () {
         // TODO: This is not behaving with Alpine right now
         this.story.isPlaying = false;
-        console.log(this.story.isPlaying);
-
+        
     }
 }
 
