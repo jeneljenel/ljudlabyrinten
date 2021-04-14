@@ -1,0 +1,21 @@
+{
+    "id": "adventurer_02",
+    "name": "Second story to the adventurer",
+    "tags": ["adventurer", "second"],
+    "triggers": [ 
+        {
+            "station_id": "2",
+            "trigger": "playAudio",
+            "audioType": "story", 
+            "audioFilename": "adventurer_02.mp3"
+        },
+        {       
+            "trigger": "startTimeLimit",
+            "timeLimit": 10,
+            "timeLimitEnd": {
+                "trigger": "goToStation",
+                "toStation": "adventurer-03"
+            }
+        }
+    ]
+}

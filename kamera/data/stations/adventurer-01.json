@@ -1,0 +1,37 @@
+{
+    "id": "adventurer_01",
+    "name": "Intro to the adventurer",
+    "tags": ["adventurer", "intro"],
+    "triggers": [ 
+        {
+            "station_id": "1",
+            "trigger": "playAudio",
+            "audioType": "story", 
+            "audioFilename": "adventurer_01.mp3"
+        },
+        {       
+            "trigger": "startTimeLimit",
+            "timeLimit": 5,
+            "timeLimitEnd": {
+                "trigger": "goToStation",
+                "toStation": "help-01"
+            }
+        },
+        {       
+            "trigger": "startTimeLimit",
+            "timeLimit": 10,
+            "timeLimitEnd": {
+                "trigger": "goToStation",
+                "toStation": "help-02"
+            }
+        },
+        {       
+            "trigger": "startTimeLimit",
+            "timeLimit": 15,
+            "timeLimitEnd": {
+                "trigger": "goToStation",
+                "toStation": "adventurer-02"
+            }
+        }
+    ]
+}

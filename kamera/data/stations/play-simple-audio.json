@@ -8,6 +8,6 @@
             "trigger": "playAudio",
             "audioType": "story", 
             "audioFilename": "play-simple-audio.mp4"
-        }
+        }        
     ]
 }

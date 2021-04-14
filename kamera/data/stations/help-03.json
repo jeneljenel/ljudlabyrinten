@@ -1,0 +1,13 @@
+{
+    "id": "help-02",
+    "name": "Playing help - 2, for test",
+    "tags": ["help", "audio"],
+    "triggers": [ 
+        {
+            "station_id": "1",
+            "trigger": "playAudio",
+            "audioType": "help", 
+            "audioFilename": "help_02.mp3"
+        }
+    ]
+}
