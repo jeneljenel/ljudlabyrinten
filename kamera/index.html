@@ -25,7 +25,7 @@
 
 <body>
 
-    <main x-data="state" x-init="init()" x-on:refresh.window="init">
+    <main x-data="state()">
         <div id="container">
             <h1>Låt äventyret börja!</h1>
             <a id="btn-scan-qr" @click="showQRScanner">

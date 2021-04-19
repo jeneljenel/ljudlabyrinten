@@ -67,103 +67,100 @@
     }
 
 */
-var state = {
-    story: {
-        isPlaying: false,
-        data: {}
-    },
-    user: {
-        showCamera: false,
-        showQRScanner: false,
-        audiosource: false,
-        stationsVisited: [], // array of story ids already visited
-        scariness: 1, // 1-3, 3 is terrifying
-        tags: []
-    },
-    audio: {
-        track: {
-            story: null,
-            music: null,
-            message: null,
-            effect: null,
-            help: null,
+function state() {
+    return {
+        story: {
+            isPlaying: false,
+            data: {}
         },
-    },
-    refreshCounter: 0,
-    fakeId: "audio-and-timer",
-    
-    init: function () {
-        // var audioElement = getAudio();
-        // audioElement.addEventListener('canplaythrough', event => {
-        //     audioElement.play();
-        // });
-    },
-    
-    fakeScan: function(story_id) {
-        this.tryStory(story_id);
-    },
-
-    showQRScanner: function () {
-        this.user.showQRScanner = true;
-        scanQRCode(story_id => {
+        user: {
+            showCamera: false,
+            showQRScanner: false,
+            audiosource: false,
+            stationsVisited: [], // array of story ids already visited
+            scariness: 1, // 1-3, 3 is terrifying
+            tags: []
+        },
+        audio: {
+            track: {
+                story: null,
+                music: null,
+                message: null,
+                effect: null,
+                help: null,
+            },
+        },
+        fakeId: "audio-and-timer",
+        
+        init: function () {
+            // var audioElement = getAudio();
+            // audioElement.addEventListener('canplaythrough', event => {
+            //     audioElement.play();
+            // });
+        },
+        
+        fakeScan: function(story_id) {
             this.tryStory(story_id);
-        });
-    },
-    
-    tryStory: function (story_id, optionalUser) {
-        let user = this.user;
-        if (optionalUser !== undefined) {
-            user = optionalUser;
-        }
-        var story = loadStory(story_id, storyData => {
-            window.Station.interpretStation(user, storyData);
-        });
-    },
-    
-    withUser: function (callback) {
-        callback(this.user);
-    },
+        },
 
-    playAudio: function (filepath, type) {
-        let story = this.story;
-
-        if (type ==" story" && story.isPlaying == true) {
-            console.log("Story is playing, wait until finished.")
-        } else {
-            console.log("Audio type is not STORY or STORY is not playing, and you are scanning audio type: ", type, ". Should play audio...")
-            audio = new Audio("data/audio/" + filepath);
-            if (this.audio.track[type] !== null) {
-                // Would be nice to fade it here...
-                this.audio.track[type].pause();
+        showQRScanner: function () {
+            this.user.showQRScanner = true;
+            scanQRCode(story_id => {
+                this.tryStory(story_id);
+            });
+        },
+        
+        tryStory: function (story_id, optionalUser) {
+            let user = this.user;
+            let state = this;
+            if (optionalUser !== undefined) {
+                user = optionalUser;
             }
-            this.audio.track[type] = audio;
-            this.audio.track[type].play();
+            state.user = user;
+            var story = loadStory(story_id, storyData => {
+                window.Station.interpretStation(state, storyData);
+            });
+        },
+        
+        withUser: function (callback) {
+            callback(this.user);
+        },
 
-            if (type == "story") {
-                // TODO: This is not behaving with Alpine right now
-                story.isPlaying = true;
-                console.log("story isPlaying value should be set to true: ", story.isPlaying)
-                this.audio.track[type].addEventListener("ended", () => {
-                    window.state.storyAudioEnded();
-                });
+        playAudio: function (filepath, type) {
+            let story = this.story;
+            let state = this;
+
+            if (type ==" story" && story.isPlaying == true) {
+                console.log("Story is playing, wait until finished.")
             } else {
-                console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
+                console.log("Audio type is not STORY or STORY is not playing, and you are scanning audio type: ", type, ". Should play audio...")
+                audio = new Audio("data/audio/" + filepath);
+                if (this.audio.track[type] !== null) {
+                    // Would be nice to fade it here...
+                    this.audio.track[type].pause();
+                }
+                this.audio.track[type] = audio;
+                this.audio.track[type].play();
+
+                if (type == "story") {
+                    // TODO: This is not behaving with Alpine right now
+                    story.isPlaying = true;
+                    console.log("story isPlaying value should be set to true: ", story.isPlaying)
+                    this.audio.track[type].addEventListener("ended", () => {
+                        state.storyAudioEnded();
+                    });
+                } else {
+                    console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
+                }
             }
+        },
+
+        storyAudioEnded: function () {
+            // TODO: This is not behaving with Alpine right now
+            this.story.isPlaying = false;
+            
         }
-    },
-
-    storyAudioEnded: function () {
-        // TODO: This is not behaving with Alpine right now
-        console.log("ended, was", this.story.isPlaying);
-        this.story.isPlaying = false;
-        this.refresh();
-    },
-
-    refresh: function () {
-        console.log("refresh", this);
-        const event = new Event('refresh');
-        window.dispatchEvent(event);
-    }
+    };
 }
 
 
