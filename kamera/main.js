@@ -67,91 +67,96 @@
     }
 
 */
-var state = {
-    story: {
-        isPlaying: false,
-        data: {}
-    },
-    user: {
-        showCamera: false,
-        showQRScanner: false,
-        audiosource: false,
-        stationsVisited: [], // array of story ids already visited
-        scariness: 1, // 1-3, 3 is terrifying
-        tags: []
-    },
-    audio: {
-        track: {
-            story: null,
-            music: null,
-            message: null,
-            effect: null,
-            help: null,
+function state() {
+    return {
+        story: {
+            isPlaying: false,
+            data: {}
         },
-    },
-    fakeId: "audio-and-timer",
-    
-    init: function () {
-        // var audioElement = getAudio();
-        // audioElement.addEventListener('canplaythrough', event => {
-        //     audioElement.play();
-        // });
-    },
-    
-    fakeScan: function(story_id) {
-        this.tryStory(story_id);
-    },
-
-    showQRScanner: function () {
-        this.user.showQRScanner = true;
-        scanQRCode(story_id => {
-            this.tryStory(story_id);
-        });
-    },
-    
-    tryStory: function (story_id, optionalUser) {
-        let user = this.user;
-        if (optionalUser !== undefined) {
-            user = optionalUser;
-        }
-        var story = loadStory(story_id, storyData => {
-            window.Station.interpretStation(user, storyData);
-        });
-    },
-    
-    withUser: function (callback) {
-        callback(this.user);
-    },
-
-    playAudio: function (filepath, type) {
-        if (this.audio.track[type] !== null) {
-            this.audio.track[type].pause();
-        }
-        isPlaying = this.story.isPlaying;
-
-        if (isPlaying == false) {
-            console.log("story isPlaying value: ", isPlaying);
-            audio = new Audio("data/audio/" + filepath);
-            this.audio.track[type] = audio;
-            this.audio.track[type].play();
-        }
-
-        if (type == "story") {
-            // TODO: This is not behaving with Alpine right now
-            this.story.isPlaying = true;
-            console.log("story isPlaying value should be set to true: ", isPlaying)
-            this.audio.track[type].addEventListener("ended", event => {
-                console.log("Ended")
-                window.state.storyAudioEnded();
-            });
-        }
-    },
-
-    storyAudioEnded: function () {
-        // TODO: This is not behaving with Alpine right now
-        this.story.isPlaying = false;
+        user: {
+            showCamera: false,
+            showQRScanner: false,
+            audiosource: false,
+            stationsVisited: [], // array of story ids already visited
+            scariness: 1, // 1-3, 3 is terrifying
+            tags: []
+        },
+        audio: {
+            track: {
+                story: null,
+                music: null,
+                message: null,
+                effect: null,
+                help: null,
+            },
+        },
+        fakeId: "audio-and-timer",
         
-    }
+        init: function () {
+            // var audioElement = getAudio();
+            // audioElement.addEventListener('canplaythrough', event => {
+            //     audioElement.play();
+            // });
+        },
+        
+        fakeScan: function(story_id) {
+            this.tryStory(story_id);
+        },
+
+        showQRScanner: function () {
+            this.user.showQRScanner = true;
+            scanQRCode(story_id => {
+                this.tryStory(story_id);
+            });
+        },
+        
+        tryStory: function (story_id, optionalUser) {
+            let user = this.user;
+            let state = this;
+            if (optionalUser !== undefined) {
+                user = optionalUser;
+            }
+            state.user = user;
+            var story = loadStory(story_id, storyData => {
+                window.Station.interpretStation(state, storyData);
+            });
+        },
+        
+        withUser: function (callback) {
+            callback(this.user);
+        },
+
+        playAudio: function (filepath, type) {
+            let state = this;
+            if (this.audio.track[type] !== null) {
+                this.audio.track[type].pause();
+            }
+            isPlaying = this.story.isPlaying;
+
+            if (isPlaying == false) {
+                console.log("story isPlaying value: ", isPlaying);
+                audio = new Audio("data/audio/" + filepath);
+                this.audio.track[type] = audio;
+                this.audio.track[type].play();
+            }
+
+            if (type == "story") {
+                // TODO: This is not behaving with Alpine right now
+                this.story.isPlaying = true;
+                console.log("story isPlaying value should be set to true: ", isPlaying)
+                this.audio.track[type].addEventListener("ended", event => {
+                    console.log("Ended")
+                    state.storyAudioEnded();
+                });
+            }
+        },
+
+        storyAudioEnded: function () {
+            // TODO: This is not behaving with Alpine right now
+            this.story.isPlaying = false;
+            
+        }
+    };
 }
 
 document.addEventListener("DOMContentLoaded", function() {

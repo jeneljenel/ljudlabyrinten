@@ -1,0 +1,42 @@
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script>
+function state() {
+    return {
+        unnested: false,
+        nested: {
+            thing: false
+        },
+        doThing: function () {
+            let state = this;
+            console.log("unnested from", this.unnested, "to", !this.unnested);
+            this.unnested = !this.unnested;
+            console.log("nested from", this.nested.thing, "to", !this.nested.thing);
+            this.nested.thing = !this.nested.thing;
+/*            window.setTimeout(() => {
+                state.doThing();
+            }, 2000);*/
+            later(this);
+        }
+    };
+}
+
+window.addEventListener("test", function (e) {
+    e.detail.doThing();
+});
+
+function later(state) {
+    const event = new CustomEvent('test', { detail: state});
+    window.setTimeout(function () {
+        window.dispatchEvent(event);
+    }, 2000);
+}
+</script>
+
+<div x-data="state()">
+    Un-nested: <span x-text="unnested"></span>
+    <br>
+    Nested: <span x-text="nested.thing"></span>
+    <br>
+    <br>
+    <button @click="doThing()">Pushy</button>
+</div>
