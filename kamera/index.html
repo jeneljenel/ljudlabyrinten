@@ -27,8 +27,8 @@
 
     <main x-data="state()">
         <div id="container">
-            <h1>Låt äventyret börja!</h1>
-            <a id="btn-scan-qr" @click="showQRScanner">
+            <h1 x-show="user.stationsVisited.length == 0">Låt äventyret börja!</h1>
+            <a id="btn-scan-qr" x-show="!story.isPlaying" @click="showQRScanner">
                 <img src="/data/camera.png">
                 <p id="openScanner">Tryck för att starta</p>
             </a>

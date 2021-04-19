@@ -92,13 +92,6 @@ function state() {
         },
         fakeId: "audio-and-timer",
         
-        init: function () {
-            // var audioElement = getAudio();
-            // audioElement.addEventListener('canplaythrough', event => {
-            //     audioElement.play();
-            // });
-        },
-        
         fakeScan: function(story_id) {
             this.tryStory(story_id);
         },
