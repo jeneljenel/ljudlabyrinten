@@ -19,12 +19,10 @@ let conditions = {
 
 let triggers = {
     "playAudio": function (user, trigger) {
-        console.log("play audio because trigger: ", trigger);
-
         window.state.playAudio(trigger.audioFilename, trigger.audioType);
     },
     "startTimeLimit": function (user, trigger) {
-        console.log("starting timer");
+        // console.log("starting timer");
         window.setTimeout(function () {
             interpretTrigger(user, trigger.timeLimitEnd);
         }, trigger.timeLimit * 1000);
@@ -39,10 +37,10 @@ function interpretCondition(user, trigger) {
         return true;
     } else {
         if (conditions[trigger.condition] !== undefined) {
-            console.log("found condition!")
+            // console.log("found condition!")
             return conditions[trigger.condition](user, trigger.conditionArgs);
         } else {
-            console.log("fail")
+            // console.log("fail")
             return false;
         }
     }

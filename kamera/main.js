@@ -89,6 +89,7 @@ var state = {
             help: null,
         },
     },
+    refreshCounter: 0,
     fakeId: "audio-and-timer",
     
     init: function () {
@@ -124,35 +125,47 @@ var state = {
     },
 
     playAudio: function (filepath, type) {
-        if (this.audio.track[type] !== null) {
-            this.audio.track[type].pause();
-        }
-        isPlaying = this.story.isPlaying;
+        let story = this.story;
 
-        if (isPlaying == false) {
-            console.log("story isPlaying value: ", isPlaying);
+        if (type ==" story" && story.isPlaying == true) {
+            console.log("Story is playing, wait until finished.")
+        } else {
+            console.log("Audio type is not STORY or STORY is not playing, and you are scanning audio type: ", type, ". Should play audio...")
             audio = new Audio("data/audio/" + filepath);
+            if (this.audio.track[type] !== null) {
+                // Would be nice to fade it here...
+                this.audio.track[type].pause();
+            }
             this.audio.track[type] = audio;
             this.audio.track[type].play();
-        }
 
-        if (type == "story") {
-            // TODO: This is not behaving with Alpine right now
-            this.story.isPlaying = true;
-            console.log("story isPlaying value should be set to true: ", isPlaying)
-            this.audio.track[type].addEventListener("ended", event => {
-                console.log("Ended")
-                window.state.storyAudioEnded();
-            });
+            if (type == "story") {
+                // TODO: This is not behaving with Alpine right now
+                story.isPlaying = true;
+                console.log("story isPlaying value should be set to true: ", story.isPlaying)
+                this.audio.track[type].addEventListener("ended", () => {
+                    window.state.storyAudioEnded();
+                });
+            } else {
+                console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
+            }
         }
     },
 
     storyAudioEnded: function () {
         // TODO: This is not behaving with Alpine right now
+        console.log("ended, was", this.story.isPlaying);
         this.story.isPlaying = false;
-        
+        this.refresh();
+    },
+
+    refresh: function () {
+        console.log("refresh", this);
+        const event = new Event('refresh');
+        window.dispatchEvent(event);
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
     window.initQR();

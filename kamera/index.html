@@ -25,7 +25,7 @@
 
 <body>
 
-    <main x-data="state" x-init="init()">
+    <main x-data="state" x-init="init()" x-on:refresh.window="init">
         <div id="container">
             <h1>Låt äventyret börja!</h1>
             <a id="btn-scan-qr" @click="showQRScanner">
@@ -36,10 +36,10 @@
         </div>
 
         <div x-text="user.tags"></div>
-        <div x-text="story.isPlaying"></div>
+        <div x-text="JSON.stringify(story)"></div>
 
         <form class="devhelper" @submit.prevent="fakeScan(fakeId)">
-            <input type="text" x-model="fakeId" />
+            <input type="text" x-model="fakeId" autofocus/>
             <button>fake</button>
         </form>
 
