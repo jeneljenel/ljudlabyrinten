@@ -1,72 +1,4 @@
-/*
-    Användaren:
-        - Typ av användare (äventyrlig/klurig/engelsman)
-        - Platser den redan varit
-        - Val som har gjorts (koder som skannats, kanske samma som platser den varit)
 
-    Station:
-        - Ljud ska troligen spelas upp
-        - En eller flera timers kan startas och när den går ut händer NÅNTING
-        - Spara värden för senare bruk
-        - Deaktivera andra stationer
-        - Aktivera andra stationer
-        - Byta akt
-        - Sätta ett tema (påverka musik och stämning)
-
-    data/audio
-        - Type: vissa sortes ljudspår ska kunna avbrytas såsom bakgrundsljud. Men användaren ska inte avbryta en story? 
-
-    {
-        id: "spoket-under-rulltrappan",
-        name: "Spöket under rulltrappan",
-        tags: [
-            "danger",
-            "puzzle"
-        ],
-        triggers: [
-            // use-case, play simple audio
-            {
-                trigger: "playAudio",
-                audioType: "story", // story|background
-                audioFilename: "simpleaudio1.mp4"
-            }
-            
-            // use-case, play different audio by player type
-            {
-                condition: "hasTag",
-                conditionArgs: "adventurer",
-                trigger: "playAudio",
-                audioType: "story", // story|background
-                audioFilename: "adventure1.mp4"
-            },
-            {
-                condition: "hasTag",
-                conditionArgs: "puzzler",
-                trigger: "playAudio",
-                audioType: "story", // story|background
-                audioFilename: "puzzler1.mp4"
-            },
-            
-            // use-case, play audio AND set timer for adventurers
-            {
-                condition: "hasTag",
-                conditionArgs: "adventurer",
-                trigger: "playAudio",
-                audioType: "story", // story|background
-                audioFilename: "adventure1.mp4"
-            },
-            {
-                condition: "hasTag",
-                conditionArgs: "adventurer",
-                trigger: "startTimeLimit",
-                timeLimit: 240,
-                timeLimitFailure: "goToStation",
-                timeLimitFailureArgs: "adventure-failed-1",
-            },
-        ]
-    }
-
-*/
 function state() {
     return {
         story: {
@@ -90,10 +22,18 @@ function state() {
                 help: null,
             },
         },
-        fakeId: "audio-and-timer",
-        
+
+        fakeId: {
+            1: {
+                filename:"audio-and-timer"
+            },
+            2: {
+                filename:"adventurer-01"
+            }
+        },            
         fakeScan: function(story_id) {
             this.tryStory(story_id);
+           
         },
 
         showQRScanner: function () {
@@ -172,5 +112,9 @@ function getSource() {
 function loadStory(story_id, callback) {
     $.get("data/stations/" + story_id + ".json", callback); 
 }
+
+
+
+
 
 window.state = state;

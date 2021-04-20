@@ -1,4 +1,6 @@
+
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
 <script>
 function state() {
     return {
@@ -16,6 +18,11 @@ function state() {
                 state.doThing();
             }, 2000);*/
             later(this);
+        },
+        getFakeId: function () {
+            console.log("hämtar...")
+            getFileNames();
+
         }
     };
 }
@@ -30,6 +37,22 @@ function later(state) {
         window.dispatchEvent(event);
     }, 2000);
 }
+
+function getFileNames() {
+    /*TODO
+    read filenames, push to array, 
+    filenames: {
+        1: {
+            filename: foo
+        },
+        2: {
+            filename: bah
+        }
+    } 
+    
+    */return array
+    
+}
 </script>
 
 <div x-data="state()">
@@ -39,4 +62,6 @@ function later(state) {
     <br>
     <br>
     <button @click="doThing()">Pushy</button>
+
+    <button @click="getFakeId">Get fake id </button>
 </div>

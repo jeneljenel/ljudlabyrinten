@@ -38,11 +38,57 @@
         <div x-text="user.tags"></div>
         <div x-text="JSON.stringify(story)"></div>
 
+
+         <!-- <form class="devhelper" @submit.prevent="fakeScan(stationName)">
+             <select @onchange="fakeScan(stationName)">
+                <template x-for="stationName in fakeId">
+                    <option x-text=stationName value="stationName"></option>
+                 
+                </template>
+                
+             </select>
+             <button>fake</button>
+        </form>  -->
+    
+        <form class="devhelper" @submit.prevent="fakeScan(fakeId)">
+            <select x-on:change="console.log('du gör ett val')">
+                <templat
+                    x-for="file in Object.keys(fakeId)"
+                    :key="file"                
+                >
+                <option :value="fakeId[file].filename" x-text="fakeId[file].filename"></option>
+            </template>
+            </select>
+            <button >fake</button>
+
+        </div>
+
+       
         <form class="devhelper" @submit.prevent="fakeScan(fakeId)">
             <input type="text" x-model="fakeId" autofocus/>
             <button>fake</button>
         </form>
+        
+        <!-- <div>
+            <input type="hidden" :value="selected.value">
+            <input type="text" x-model="search" placeholder="Click to search..." @click="optionsVisible = !optionsVisible">
+            <div x-show="optionsVisible">
+                <template x-for="option in filteredOptions()">
+                    <a @click.prevent="selected = option; optionsVisible = false" x-text="option.label" style="display: block;"></a>
+                </template>
+            </div>
+            <p>Current search: <span x-text="search"></span></p>
+            <p>Selected option: <span x-text="selected.label"></span></p>
+        </div>
+        
+        </div>
 
+         <form class="devhelper" @submit.prevent="fakeScan(fakeId)">
+            <input type="text" x-model="fakeId" autofocus/>
+            <button>fake</button>
+        </form>
+         -->        
+      
         <!-- 
         <div class="hearingImpaired">
             <section x-data="{ showBox: false }">
