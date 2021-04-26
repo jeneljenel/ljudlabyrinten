@@ -1,6 +1,9 @@
 
 function state() {
     return {
+        game: {
+            isLoading: true,
+        },
         story: {
             isPlaying: false,
             data: {}
@@ -23,17 +26,14 @@ function state() {
             },
         },
 
-        fakeId: {
-            1: {
-                filename:"audio-and-timer"
-            },
-            2: {
-                filename:"adventurer-01"
-            }
-        },            
+        fakeId: "adventurer-01",
+
+        startGame: function() {
+            this.startGame();
+        },
+
         fakeScan: function(story_id) {
             this.tryStory(story_id);
-           
         },
 
         showQRScanner: function () {
@@ -66,7 +66,6 @@ function state() {
             if (type ==" story" && story.isPlaying == true) {
                 console.log("Story is playing, wait until finished.")
             } else {
-                console.log("Audio type is not STORY or STORY is not playing, and you are scanning audio type: ", type, ". Should play audio...")
                 audio = new Audio("data/audio/" + filepath);
                 if (this.audio.track[type] !== null) {
                     // Would be nice to fade it here...
@@ -76,7 +75,6 @@ function state() {
                 this.audio.track[type].play();
 
                 if (type == "story") {
-                    // TODO: This is not behaving with Alpine right now
                     story.isPlaying = true;
                     console.log("story isPlaying value should be set to true: ", story.isPlaying)
                     this.audio.track[type].addEventListener("ended", () => {
@@ -89,9 +87,7 @@ function state() {
         },
 
         storyAudioEnded: function () {
-            // TODO: This is not behaving with Alpine right now
-            this.story.isPlaying = false;
-            
+            this.story.isPlaying = false;            
         }
     };
 }
@@ -113,7 +109,12 @@ function loadStory(story_id, callback) {
     $.get("data/stations/" + story_id + ".json", callback); 
 }
 
-
+function startGame() {
+    console.log("startar timer ... ska stänga av om 5...")
+    window.setTimeout(function () {
+        interpretTrigger(state, this.game.isLoading = false);
+    }, 5 * 1000);
+}
 
 
 

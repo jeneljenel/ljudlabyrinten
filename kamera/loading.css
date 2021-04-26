@@ -298,9 +298,6 @@
   backface-visibility: hidden;
 }
 
-html, body {
-  height: 100%;
-}
 
 body {
   flex-direction: column;
@@ -318,6 +315,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 body::after {
   content: "​";
   position: relative;
@@ -331,6 +329,7 @@ body::after {
   white-space: nowrap;
   animation: typed 15.48s linear 1s infinite, beam-blink 1s infinite;
 }
+
 @media (max-width: 575px) {
   body::after {
     top: -33px;
@@ -347,62 +346,66 @@ body::after {
     border-radius: 30px;  
     background: rgba(0, 0, 0, 0.1);
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
-  }
-  .final__animation-bar-1 span {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    height: 20px;
-    border-radius: 10px 0 0 10px;
-    overflow: hidden;
-    background-color: #a6eb08;
-    background-size: 100%;
-    background-image: linear-gradient(to bottom, #0d744c, #0e7c40);
-    animation: progress-anim-1 5s infinite linear;
-  }
-  .final__animation-bar-1 span:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    content: "";
-    background-size: 100%;
-    background-image: linear-gradient(45deg, #ffffff 25%,
-                                     rgba(0, 0, 0, 0) 25%,
-                                     rgba(0, 0, 0, 0) 50%,
-                                     #ffffff 50%,
-                                     #ffffff 75%,
-                                     rgba(0, 0, 0, 0) 75%,
-                                     rgba(0, 0, 0, 0));
-    background-size: 30px 30px;
-    opacity: 0.3;
-    animation: progress-anim-1-after 0.5s infinite linear;
-  }
+}
 
-  @keyframes progress-anim-1 {
-    0% {
-      width: 0%;
-    }
-    100% {
-      width: 100%;
-    }
-    
+.final__animation-bar-2 {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  height: 20px;
+  border-radius: 10px 0 0 10px;
+  overflow: hidden;
+  background-color: #a6eb08;
+  background-size: 100%;
+  background-image: linear-gradient(to bottom, #0d744c, #0e7c40);
+  animation: progress-anim-1 5s infinite linear;
+  width: 10%;
+}
+
+.final__animation-bar-1 span:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  background-size: 100%;
+  background-image: linear-gradient(45deg, #ffffff 25%,
+                                    rgba(0, 0, 0, 0) 25%,
+                                    rgba(0, 0, 0, 0) 50%,
+                                    #ffffff 50%,
+                                    #ffffff 75%,
+                                    rgba(0, 0, 0, 0) 75%,
+                                    rgba(0, 0, 0, 0));
+  background-size: 30px 30px;
+  opacity: 0.3;
+  animation: progress-anim-1-after 0.5s infinite linear;
+}
+
+@keyframes progress-anim-1 {
+  0% {
+    width: 0%;
   }
+  100% {
+    width: 100%;
+  }
+  
+}
  
-   .wrapper{
+.wrapper2 {
     width: 10%;
     padding: 20px;
     box-sizing: border-box;   
 }
 
-img {
+.animated-erik {
     transform: scaleX(1);
     animation-name: fly;
     animation-duration: 5s;
     animation-fill-mode: both;
     animation-iteration-count: 3;
     animation-timing-function: linear;
+    position: relative;
     top: -40px;
   
 }
@@ -412,7 +415,6 @@ img {
     to{ transform: translateX(550px);}
 }
 
-
- .hejsvejs{
-  width: 80%;
+.bar {
+  width: 50%;
 }
