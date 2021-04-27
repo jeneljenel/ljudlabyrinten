@@ -31,10 +31,7 @@
         * knappar för att välja och sätta user.scariness;
     3. bakgrundsmusik + kamera på
     4. skannar första stationen
-
- -->
-    <main x-data="state()">
-        <div id="container">
+  <div id="container">
             <div x-data="this.startGame()" x-show="game.isLoading" class="wrapper2">             
                 <img class="animated-erik" src="data/ghost.PNG">
             </div>
@@ -43,15 +40,24 @@
                     <span class="final__animation-bar-2"></span>
                 </div>
             </section>
-        
-            
-
-        </div>
-        
+ -->
+    <main x-data="state()">
         <div id="container">
             <h1 x-show="user.stationsVisited.length == 0">Låt äventyret börja!</h1>
             <a id="btn-scan-qr" x-show="!story.isPlaying" @click="showQRScanner">
                 <img  src="/data/camera.png">
+                <template x-if="user.showQRScanner">
+                    <ul
+                    @click.away="user.showQRScanner = false"
+                    x-transition:enter="transition-in"
+                    x-transition:enter-start="transition-in-start"
+                    x-transition:enter-end="transition-in-stop"                                         
+                    x-transition:leave="transition-out"
+                    x-transition:leave-start="transition-out-start"
+                    x-transition:leave-end="transition-out-stop"
+                >
+                </ul>
+                </template>
                 <p id="openScanner">Tryck för att starta</p>
             </a>
              <canvas x-show="user.showQRScanner" hidden="" id="qr-canvas"></canvas>
@@ -60,16 +66,28 @@
         <div x-text="user.tags"></div>
         <div x-text="JSON.stringify(story)"></div>
 
-
        
         <form class="devhelper" @submit.prevent="fakeScan(fakeId)">
             <input type="text" x-model="fakeId" autofocus/>
             <button>fake</button>
         </form>
         
- 
         </div>
-               
+       
+        <div x-data="{ open: false }">
+            <button id ="Svårighetsgrad" @click="open = true" class="m-2 p-2 text-sm font-medium bg-gray-200 rounded-lg outline-none focus:outline-none">Svårighetsgrad</button>
+        
+            <ul
+                x-show.transition.origin.top.left="open"
+                @click.away="open = false"
+                class="shadow-sm p-5 rounded max-w-sm ml-2 border border-gray-200"
+            >
+                  <button id="Svårighetsgrad">Adventurer</button>
+                  <button id="Svårighetsgrad">Puzzel</button>
+                  <button id="Svårighetsgrad">English</button>
+              
+            </ul>
+        </div>   
       
         <!-- 
         <div class="hearingImpaired">

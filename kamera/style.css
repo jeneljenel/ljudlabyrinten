@@ -158,3 +158,46 @@ h1 {
 }
   
 
+#svårighetsgrad{
+  background-color:pink;
+  box-shadow: 1px 1px 0px #999,
+    2px 2px 0px #999,
+    3px 2px 0px #999,
+    4px 4px 0px #999,
+    5px 5px 0px #999;
+}
+
+/* STYLE FOR TRANSITIONS */
+.transition-in {
+  transform-origin: top left;
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 50000ms;
+}
+
+.transition-in-start {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.transition-in-stop {
+  opacity: 100;
+  transform: scale(1);
+}
+
+.transition-out {
+  transform-origin: top left;
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 2000ms;
+}
+
+.transition-out-start {
+  opacity: 100;
+  transform: scale(1);
+}
+
+.transition-out-stop {
+  opacity: 0;
+  transform: scale(0.9);
+}

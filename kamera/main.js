@@ -34,6 +34,7 @@ function state() {
 
         fakeScan: function(story_id) {
             this.tryStory(story_id);
+            this.user.showQRScanner = false;
         },
 
         showQRScanner: function () {
