@@ -69,6 +69,13 @@ button, input[type=button], input[type=submit], a.button {
   left: 8px;
 }
 
+.devtext {
+  color: white;
+  font-size: 10px;
+  padding: 5px;
+}
+
+/* Stylesheet for texting of the saga */
 #text {
     width: 40%;
     text-align: justify;
@@ -85,21 +92,21 @@ button, input[type=button], input[type=submit], a.button {
     text-align: center;
 }
 
+#hearingImpBtn {
+  border: 2px solid #383838;
+  border-radius: 30px;
+  background: none;
+  padding: 10px 20px;
+  font-size: 25px;
+  cursor: pointer;
+  margin: 10px;
+  color: #383838
+}
+
 
 /* QR SCANNER */
 .qr-scanner-area, #reader {
     width: 500px;
-}
-
-#hearingImpBtn {
-    border: 2px solid #383838;
-    border-radius: 30px;
-    background: none;
-    padding: 10px 20px;
-    font-size: 25px;
-    cursor: pointer;
-    margin: 10px;
-    color: #383838
 }
 
 input:focus,
@@ -111,13 +118,12 @@ button:focus {
     transform: scale(1.05);
 }
 
-
-h1 {
+/* h1 {
     color: black;
     margin: 0;
     padding: 15px;
-}
-  
+} */
+
 #container {
   text-align: center;
   margin-top: 100px;

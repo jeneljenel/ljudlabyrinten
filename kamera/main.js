@@ -28,10 +28,6 @@ function state() {
 
         fakeId: "adventurer-01",
 
-        startGame: function() {
-            this.startGame();
-        },
-
         fakeScan: function(story_id) {
             this.tryStory(story_id);
             this.user.showQRScanner = false;
@@ -109,14 +105,6 @@ function getSource() {
 function loadStory(story_id, callback) {
     $.get("data/stations/" + story_id + ".json", callback); 
 }
-
-function startGame() {
-    console.log("startar timer ... ska stänga av om 5...")
-    window.setTimeout(function () {
-        interpretTrigger(state, this.game.isLoading = false);
-    }, 5 * 1000);
-}
-
 
 
 window.state = state;
