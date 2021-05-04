@@ -24,7 +24,7 @@ Scenario A - adventurer:
         3. innan Timer 1 är slut sätt på hjälpfil för att hitta till station 1 i Akt 1.
         (4. när Timer 1 är slut = sätt på ljudfil station 1 i Akt 1. )
 
-    Akt 1 (innehåller 5 fristående stationer, 5 fristeående audiotracks) 
+    Akt 1 (innehåller 5 fristående stationer, 5 fristående audiotracks) 
     * Timer 2 sätts på (för hela Akt 1) 15 sek
         1.
 
@@ -34,9 +34,43 @@ Scenario A - adventurer:
     Story 3 (del 3 och sista delen av den linjära storyn)
 
 
-# HELP
-- ska kunna scanna en kod för att få hjälp VS att spela hjälp
+# HELP - GLOBAL
+Global hjälp - scanna själva guldbiljetten
+- användaren kan nyttja X antal hjälpfiler. Närsomhelst i spelet.
+- när användaren nyttjat X antal hjälpfiler notifieras denne att hjälpfilerna är slut.
 
+# HELP - LOCAL
+Lokal hjälp - hjälper användaren fram mellan de fristående stationerna i Akt 1.
+- timer-triggade hjälpfiler
+- ej stationsberoende mer "tänk på guldiga grejer" eller "nu är det dags att gå vidare... lillebror ropar" 
+- scanning av en ny station avgryter denna timer
+
+
+### MANUS OCH CASES FÖR DEMO
+
+olika nivåer reglerar:
+    olika ljudtyper om man vill
+    timers för mellan icke linjära stationer i Akt 1
+    timer för hela spelet
+
+
+# Adventurer
+Skanna linjära sagan (3) = intro, mitten, avslut
+    intro = lika för alla
+    mitten = 2 olika:
+        regleras av antalet besökta stationer i Akt 1 
+    avslut = 2 olika:
+        reglerav av användarens val.
+
+Skanna gulbiljetten för hjälp (4): 3 hjälp + "slut på hjälp"
+
+Skanna station i Akt 1 (3) , icke linjära
+
+Skanna guldbiljetten när du är i Akt 1 (3) = trigga timer-triggande hjälpfilen = "hjälpfil till station 1"
+
+
+# Puzzler
+Skip for now
 
 
 # LARS Notes of data struktur

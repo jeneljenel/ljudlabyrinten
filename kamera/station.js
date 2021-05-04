@@ -11,10 +11,6 @@ let conditions = {
         }
         //TODO: Add logic to check tag to user
     },
-    "isItFriday": function (state, bla) {
-        // Vad är det för dag?
-        return true;
-    },
 };
 
 let triggers = {
