@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=0" />
 
     <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="station.js"></script>
     <script src="qrCodeScanner.js"></script>
     <script src="main.js"></script>
@@ -19,10 +19,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-    
 <!-- 
     1. användaren klickar sig in på webbplats
         * loading...
@@ -44,8 +42,6 @@
             </section>
  -->
 
-
-
     <main x-data="state()">
 
         <!-- DEV stuff // remove before prod. -->
@@ -60,14 +56,14 @@
             <!-- DEV. //remove before prod. -->
             <div class="devtext" x-text="user.tags"></div>
             <div class="devtext" x-text="JSON.stringify(story)"></div> 
+            <div class="devtext" x-text="user.helpAvailable"></div> 
         <!-- </div> -->
-
 
         <!-- START loding the game -->
         <div id="container">
-            <div class="wrapper2">
+            <!-- <div class="wrapper2">
                 <img class="animated-erik" src="data/ghost.PNG">
-            </div>
+            </div> -->
             <section>
                 <div id="test" class="final__animation-bar-1">
                     <span class="final__animation-bar-2"></span>
@@ -121,7 +117,5 @@
             </section>
         </div> -->
     </main>
-
-    
 </body>
 </html>

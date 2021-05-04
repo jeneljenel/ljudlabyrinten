@@ -9,6 +9,10 @@
             "audioType": "story", 
             "audioFilename": "adventurer_02.mp3"
         },
+        {
+            "trigger": "cancelTimer",
+            "timerName": "adv-01-timer-act-01"
+        },      
         {       
             "trigger": "startTimeLimit",
             "timeLimit": 10,

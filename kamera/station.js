@@ -18,6 +18,9 @@ let conditions = {
 };
 
 let triggers = {
+    "onHelp": function (state, trigger) {
+        // does nothing on station load
+    },
     "playAudio": function (state, trigger) {
         console.log("play audio because trigger: ", trigger);
 
@@ -25,12 +28,32 @@ let triggers = {
     },
     "startTimeLimit": function (state, trigger) {
         console.log("starting timer");
-        window.setTimeout(function () {
+        let timer = window.setTimeout(function () {
             interpretTrigger(state, trigger.timeLimitEnd);
         }, trigger.timeLimit * 1000);
+        state.user.timers[trigger.timerName] = timer;
     },
     "goToStation": function (state, trigger) {
         state.tryStory(trigger.toStation);
+    },
+    "cancelTimer": function (state, trigger) {
+        let timer = state.user.timers[trigger.timerName];
+        if (timer !== undefined) {
+            window.clearTimeout(timer);
+            console.log("cancelled timer:", trigger.timerName, "reason: station trigger");
+            state.user.timers[trigger.timerName] = "cancelled";
+        }
+    }
+}
+
+let onLeave = {
+    "startTimeLimit": function (state, trigger) {
+        if (trigger.cancelOnLeave && state.user.timers[trigger.timerName]) {
+            let timer = state.user.timers[trigger.timerName];
+            window.clearTimeout(timer);
+            console.log("cancelled timer:", trigger.timerName, "reason: cancelOnLeave was set");
+            state.user.timers[trigger.timerName] = "cancelled";
+        }
     }
 }
 
@@ -57,11 +80,26 @@ function interpretTrigger(state, trigger) {
     }
 }
 
+function triggerOnLeave(state, trigger) {
+    if (trigger.trigger !== undefined) {
+        if (onLeave[trigger.trigger]) {
+            onLeave[trigger.trigger](state, trigger);
+        }
+    }
+}
+
 let stationLogic = {
     getTags(user) {
 
     },
     interpretStation(state, station) {
+        let leavingStation = state.user.stationsVisited[state.user.stationsVisited.length - 1];
+        if (leavingStation !== undefined) {
+            leavingStation.triggers.forEach(trigger => {
+                triggerOnLeave(state, trigger);
+            });
+        }
+
         station.triggers.forEach(trigger => {
             if (interpretCondition(state, trigger)) {
                 interpretTrigger(state, trigger);
@@ -73,6 +111,27 @@ let stationLogic = {
         })
         
         state.user.stationsVisited.push(station);
+    },
+    doHelp(state) {
+        let station = state.user.stationsVisited[state.user.stationsVisited.length - 1];
+        if (station !== undefined) {
+            if (state.user.helpAvailable > 0 && station.helpUsed === undefined) {
+                station.triggers.forEach(trigger => {
+                    if (trigger.trigger == "onHelp") {
+                        interpretTrigger(state, trigger.runTrigger);
+                    }
+                });
+                state.user.helpAvailable--;
+                station.helpUsed = true;
+            } else {
+                interpretTrigger(state, {
+                    trigger: "playAudio",
+                    audioType: "help", 
+                    audioFilename: "out-of-help.mp3"
+                })
+            }
+        }
+
     }
 }
 

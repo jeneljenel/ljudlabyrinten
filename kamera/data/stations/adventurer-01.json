@@ -11,14 +11,27 @@
         },
         {       
             "trigger": "startTimeLimit",
+            "timerName": "adv-01-timer-help-01",
+            "cancelOnLeave": true,
             "timeLimit": 5,
             "timeLimitEnd": {
-                "trigger": "goToStation",
-                "toStation": "help-01"
+                "trigger": "playAudio",
+                "audioType": "help",
+                "audioFilename": "help_01.mp3"
+            }
+        },
+        {
+            "trigger": "onHelp",
+            "runTrigger": {
+                "trigger": "playAudio",
+                "audioType": "help",
+                "audioFilename": "help_01.mp3"
             }
         },
         {       
             "trigger": "startTimeLimit",
+            "timerName": "adv-01-timer-help-02",
+            "cancelOnLeave": true,
             "timeLimit": 10,
             "timeLimitEnd": {
                 "trigger": "goToStation",
@@ -27,6 +40,7 @@
         },
         {       
             "trigger": "startTimeLimit",
+            "timerName": "adv-01-timer-act-01",
             "timeLimit": 15,
             "timeLimitEnd": {
                 "trigger": "goToStation",

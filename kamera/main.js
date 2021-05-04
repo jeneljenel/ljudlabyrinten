@@ -1,9 +1,6 @@
 
 function state() {
     return {
-        game: {
-            isLoading: true,
-        },
         story: {
             isPlaying: false,
             data: {}
@@ -14,7 +11,9 @@ function state() {
             audiosource: false,
             stationsVisited: [], // array of story ids already visited
             scariness: 1, // 1-3, 3 is terrifying
-            tags: []
+            tags: [],
+            timers: {},
+            helpAvailable: 3
         },
         audio: {
             track: {
@@ -29,8 +28,13 @@ function state() {
         fakeId: "adventurer-01",
 
         fakeScan: function(story_id) {
-            this.tryStory(story_id);
-            this.user.showQRScanner = false;
+            console.log("fakeScan", story_id);
+            if (story_id == "help") {
+                this.tryHelp();
+            } else {
+                this.tryStory(story_id);
+                this.user.showQRScanner = false;
+            }
         },
 
         showQRScanner: function () {
@@ -47,9 +51,23 @@ function state() {
                 user = optionalUser;
             }
             state.user = user;
-            var story = loadStory(story_id, storyData => {
-                window.Station.interpretStation(state, storyData);
-            });
+
+            if (user.stationsVisited.includes(story)) {
+                console.log("can't play story user already visited.")
+            } else {
+                var story = loadStory(story_id, storyData => {
+                    window.Station.interpretStation(state, storyData);
+                });
+            }
+
+            // var story = loadStory(story_id, storyData => {
+            //     window.Station.interpretStation(state, storyData);
+            // });
+
+        },
+        
+        tryHelp: function () {
+            window.Station.doHelp(this);
         },
         
         withUser: function (callback) {
