@@ -1,5 +1,5 @@
 {
-    "id": "adventurer_01",
+    "id": "adventurer-01",
     "name": "Intro to the adventurer",
     "tags": ["adventurer", "intro"],
     "triggers": [ 
@@ -17,15 +17,14 @@
             "timeLimitEnd": {
                 "trigger": "playAudio",
                 "audioType": "help",
-                "audioFilename": "help_01.mp3"
+                "audioFilename": "Timerhelp_01.mp3"
             }
         },
         {
             "trigger": "onHelp",
             "runTrigger": {
-                "trigger": "playAudio",
-                "audioType": "help",
-                "audioFilename": "help_01.mp3"
+                "trigger": "goToStation",
+                "toStation": "help-01"
             }
         },
         {       
@@ -34,14 +33,26 @@
             "cancelOnLeave": true,
             "timeLimit": 10,
             "timeLimitEnd": {
-                "trigger": "goToStation",
-                "toStation": "help-02"
+                "trigger": "playAudio",
+                "audioType": "help",
+                "audioFilename": "Timerhelp_02.mp3"
+            }
+        },
+        {       
+            "trigger": "startTimeLimit",
+            "timerName": "adv-01-timer-help-03",
+            "cancelOnLeave": true,
+            "timeLimit": 20,
+            "timeLimitEnd": {
+                "trigger": "playAudio",
+                "audioType": "help",
+                "audioFilename": "Timerhelp_03.mp3"
             }
         },
         {       
             "trigger": "startTimeLimit",
             "timerName": "adv-01-timer-act-01",
-            "timeLimit": 15,
+            "timeLimit": 25,
             "timeLimitEnd": {
                 "trigger": "goToStation",
                 "toStation": "adventurer-02"
