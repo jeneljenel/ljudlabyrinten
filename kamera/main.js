@@ -8,8 +8,8 @@ function state() {
         user: {
             showCamera: false,
             showQRScanner: false,
-            audiosource: false,
-            stationsVisited: [], // array of story ids already visited
+            audioSource: false,
+            stationsVisited: [], // list of station visited
             scariness: 1, // 1-3, 3 is terrifying
             tags: [],
             timers: {},
@@ -47,23 +47,25 @@ function state() {
         tryStory: function (story_id, optionalUser) {
             let user = this.user;
             let state = this;
+            let visited = [];
+
             if (optionalUser !== undefined) {
                 user = optionalUser;
             }
             state.user = user;
 
-            if (user.stationsVisited.includes(story)) {
+            for (var i = 0; i < user.stationsVisited.length; i++) {
+                visited.push(user.stationsVisited[i].id)
+            }
+            
+            if (visited.includes(story_id)) {
                 console.log("can't play story user already visited.")
             } else {
                 var story = loadStory(story_id, storyData => {
                     window.Station.interpretStation(state, storyData);
                 });
             }
-
-            // var story = loadStory(story_id, storyData => {
-            //     window.Station.interpretStation(state, storyData);
-            // });
-
+    
         },
         
         tryHelp: function () {
@@ -91,12 +93,12 @@ function state() {
 
                 if (type == "story") {
                     story.isPlaying = true;
-                    console.log("story isPlaying value should be set to true: ", story.isPlaying)
+                    // console.log("story isPlaying value should be set to true: ", story.isPlaying)
                     this.audio.track[type].addEventListener("ended", () => {
                         state.storyAudioEnded();
                     });
                 } else {
-                    console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
+                    // console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
                 }
             }
         },
