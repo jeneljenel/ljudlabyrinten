@@ -5,7 +5,7 @@
 
     <title>S P R I C K A N</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="loading.css"/>
+    <!-- <link rel="stylesheet" href="loading.css"/> -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=0" />
@@ -20,27 +20,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<!-- 
-    1. användaren klickar sig in på webbplats
-        * loading...
-    2. användaren ska välja svårighetsgrad
-        * knappar för att välja och sätta user.scariness;
-    3. bakgrundsmusik + kamera på
-    4. skannar första stationen
-
-    Detta ska visas först men krockar med kameran 
-    Måste dölja kameran först, sedan ladda-> Välja svårighetsgrad sedan kommer kameran
-  <div id="container">
-            <div x-data="this.startGame()" x-show="game.isLoading" class="wrapper2">             
-                <img class="animated-erik" src="data/ghost.PNG">
-            </div>
-            <section>
-                <div id="test" class="final__animation-bar-1">
-                    <span class="final__animation-bar-2"></span>
-                </div>
-            </section>
- -->
 
     <main x-data="state()">
 
@@ -57,13 +36,12 @@
             <div class="devtext" x-text="user.tags"></div>
             <div class="devtext" x-text="JSON.stringify(story)"></div> 
             <div class="devtext" x-text="user.helpAvailable"></div> 
-        <!-- </div> -->
-
+        </div>
         <!-- START loding the game -->
-        <div id="container">
-            <!-- <div class="wrapper2">
+        <!-- <div id="container">
+            <div class="wrapper2">
                 <img class="animated-erik" src="data/ghost.PNG">
-            </div> -->
+            </div>
             <section>
                 <div id="test" class="final__animation-bar-1">
                     <span class="final__animation-bar-2"></span>
@@ -81,7 +59,7 @@
                     <button id="Svårighetsgrad">English</button>
                 </ul>
             </div>  
-        </div>
+        </div> -->
 
 
         <!--  CAMERA SCANNER -->
