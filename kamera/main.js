@@ -83,12 +83,23 @@ function state() {
                 console.log("Story is playing, wait until finished.")
             } else {
                 audio = new Audio("data/audio/" + filepath);
+               
+               
                 if (this.audio.track[type] !== null) {
-                    var timer,
-                    myAudio = document.getElementById("audioPlayer");
-                    myAudio.volume -= 0.005;
-                    // Would be nice to fade it here...
-                    this.audio.track[type].pause();
+                    if (this.audio.track[type] !== null) {
+                
+                        // Would be nice to fade it here...
+                               var myAudio1 = document.getElementById("audioPlayer");
+                                myAudio1.volume = 0;   
+                         
+                       var myAudio2 = document.getElementById("audioSource");
+                                myAudio2.volume = 0;  
+
+                                this.audio.track[type].volume = 0.001;
+                              
+                                //this.audio.track[type].pause();
+                                
+                            }
             }
                 if (this.audio.track["music"]) {
                     this.audio.track["music"].pause();
