@@ -84,6 +84,9 @@ function state() {
             } else {
                 audio = new Audio("data/audio/" + filepath);
                 if (this.audio.track[type] !== null) {
+                    var timer,
+                    myAudio = document.getElementById("audioPlayer");
+                    myAudio.volume -= 0.005;
                     // Would be nice to fade it here...
                     this.audio.track[type].pause();
             }
