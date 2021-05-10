@@ -19,8 +19,8 @@ function state() {
             track: {
                 story: null,
                 music: null,
-                message: null,
-                effect: null,
+                // message: null,
+                // effect: null,
                 help: null,
             },
         },
@@ -75,18 +75,20 @@ function state() {
         withUser: function (callback) {
             callback(this.user);
         },
-
+        
         playAudio: function (filepath, type) {
             let story = this.story;
             let state = this;
-
-            if (type ==" story" && story.isPlaying == true) {
+            if (type == "story" && story.isPlaying == true) {
                 console.log("Story is playing, wait until finished.")
             } else {
                 audio = new Audio("data/audio/" + filepath);
                 if (this.audio.track[type] !== null) {
                     // Would be nice to fade it here...
                     this.audio.track[type].pause();
+            }
+                if (this.audio.track["music"]) {
+                    this.audio.track["music"].pause();
                 }
                 this.audio.track[type] = audio;
                 this.audio.track[type].play();
@@ -98,6 +100,9 @@ function state() {
                         state.storyAudioEnded();
                     });
                 } else {
+                    this.audio.track[type].addEventListener("ended", () => {
+                        this.audio.track["music"].play();
+                    });
                     // console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
                 }
             }
