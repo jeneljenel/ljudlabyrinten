@@ -16,6 +16,7 @@ function state() {
             helpAvailable: 3
         },
         audio: {
+            typeIsPlaying: "",
             track: {
                 story: null,
                 music: null,
@@ -65,7 +66,7 @@ function state() {
                     window.Station.interpretStation(state, storyData);
                 });
             }
-    
+
         },
         
         tryHelp: function () {
@@ -79,33 +80,30 @@ function state() {
         playAudio: function (filepath, type) {
             let story = this.story;
             let state = this;
+            let typePlaying = this.audio.typeIsPlaying;
+
             if (type == "story" && story.isPlaying == true) {
                 console.log("Story is playing, wait until finished.")
             } else {
-                audio = new Audio("data/audio/" + filepath);
-               
-               
+                audio = new Audio("data/audio/" + filepath);         
                 if (this.audio.track[type] !== null) {
-                    if (this.audio.track[type] !== null) {
-                
-                        // Would be nice to fade it here...
-                               var myAudio1 = document.getElementById("audioPlayer");
-                                myAudio1.volume = 0;   
-                         
-                       var myAudio2 = document.getElementById("audioSource");
-                                myAudio2.volume = 0;  
+                    // Would be nice to fade it here...
+                    fadeOut();             
 
-                                this.audio.track[type].volume = 0.001;
-                              
-                                //this.audio.track[type].pause();
-                                
-                            }
-            }
+                    this.audio.track[type].pause();
+                    $("audio").on("pause", function() {
+                        console.log("VI PAUSAR TYDLIGEN")
+                    })                            
+                }
+
                 if (this.audio.track["music"]) {
+                    fadeOut();             
                     this.audio.track["music"].pause();
                 }
+
                 this.audio.track[type] = audio;
                 this.audio.track[type].play();
+
 
                 if (type == "story") {
                     story.isPlaying = true;
@@ -114,7 +112,8 @@ function state() {
                         state.storyAudioEnded();
                     });
                 } else {
-                    this.audio.track[type].addEventListener("ended", () => {
+                    this.audio.track[type].addEventListener("ended", () => { 
+                        fadeOut();             
                         this.audio.track["music"].play();
                     });
                     // console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
@@ -133,12 +132,30 @@ document.addEventListener("DOMContentLoaded", function() {
     window.initQR();
 });
 
+
 function getAudio() {
     return document.getElementById("audioPlayer");    
 }
 
 function getSource() {
     return document.getElementById("audioSource");
+}
+
+function fadeOut() {
+    // console.log("fading....")
+    // $("#audioPlayer").animate({volume: 1}, 3000);
+
+    // $(".audio").prop("volume", 0.0);
+
+    // $(".audio").on("timeupdate", function() {
+    //     console.log(this.currentTime);
+    //     if (this.currentTime < 2) {
+    //     $(this).pause().animate({volume: 1.0}, 1000);
+    //     } else if (this.currentTime > 27) {
+    //     $(this).pause().animate({volume: 0.0}, 1000);
+    //     }
+    // });
+
 }
 
 function loadStory(story_id, callback) {
