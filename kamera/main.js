@@ -88,7 +88,8 @@ function state() {
                 audio = new Audio("data/audio/" + filepath);         
                 if (this.audio.track[type] !== null) {
                     // Would be nice to fade it here...
-                    fadeOut();             
+
+                           
 
                     this.audio.track[type].pause();
                     $("audio").on("pause", function() {
@@ -97,7 +98,7 @@ function state() {
                 }
 
                 if (this.audio.track["music"]) {
-                    fadeOut();             
+                                 
                     this.audio.track["music"].pause();
                 }
 
@@ -113,7 +114,7 @@ function state() {
                     });
                 } else {
                     this.audio.track[type].addEventListener("ended", () => { 
-                        fadeOut();             
+                                 
                         this.audio.track["music"].play();
                     });
                     // console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
@@ -141,21 +142,19 @@ function getSource() {
     return document.getElementById("audioSource");
 }
 
-function fadeOut() {
-    // console.log("fading....")
-    // $("#audioPlayer").animate({volume: 1}, 3000);
+var music;
 
-    // $(".audio").prop("volume", 0.0);
+function create(){
+    music = music.add.audio('music');
+    music.onDecoded.add(start,this);
+}
 
-    // $(".audio").on("timeupdate", function() {
-    //     console.log(this.currentTime);
-    //     if (this.currentTime < 2) {
-    //     $(this).pause().animate({volume: 1.0}, 1000);
-    //     } else if (this.currentTime > 27) {
-    //     $(this).pause().animate({volume: 0.0}, 1000);
-    //     }
-    // });
+function start() {
+   music.fadeIn(4000);
 
+}
+function render() {
+    game.debug.soundInfo(music, 20, 32);
 }
 
 function loadStory(story_id, callback) {
