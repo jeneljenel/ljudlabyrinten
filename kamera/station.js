@@ -112,13 +112,21 @@ let stationLogic = {
         let station = state.user.stationsVisited[state.user.stationsVisited.length - 1];
         if (station !== undefined) {
             if (state.user.helpAvailable > 0 && station.helpUsed === undefined) {
+                let triggered = false;
                 station.triggers.forEach(trigger => {
                     if (trigger.trigger == "onHelp") {
                         interpretTrigger(state, trigger.runTrigger);
+                        triggered = true;
                     }
                 });
-                state.user.helpAvailable--;
-                station.helpUsed = true;
+
+                if (!triggered) {
+                    // TODO: Default help behavior (calculate and play some file)
+                    // TODO: Assuming only default help actually consumes helpAvailable
+                    state.user.helpAvailable--;
+                } else {
+                    station.helpUsed = true;
+                }
             } else {
                 interpretTrigger(state, {
                     trigger: "playAudio",
