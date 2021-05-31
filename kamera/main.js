@@ -1,4 +1,4 @@
-
+let AudioContext = window.AudioContext || window.webkitAudioContext;
 function state() {
     return {
         story: {
@@ -12,6 +12,7 @@ function state() {
             stationsVisited: [], // list of station visited
             scariness: 1, // 1-3, 3 is terrifying
             tags: [],
+            passcodeName: "", // Need more information how to handle
             timers: {},
             helpAvailable: 3
         },
@@ -66,7 +67,6 @@ function state() {
                     window.Station.interpretStation(state, storyData);
                 });
             }
-
         },
         
         tryHelp: function () {
@@ -80,31 +80,38 @@ function state() {
         playAudio: function (filepath, type) {
             let story = this.story;
             let state = this;
-            let typePlaying = this.audio.typeIsPlaying;
+
+            console.log("filepath and type: ", filepath, type);
 
             if (type == "story" && story.isPlaying == true) {
                 console.log("Story is playing, wait until finished.")
             } else {
-                audio = new Audio("data/audio/" + filepath);         
+                let audio = new Audio("data/audio/" + filepath);
+                // let audioCtx = new AudioContext();
+                // let source = audioCtx.createMediaElementSource(audio);
+                // let gainNode = audioCtx.createGain();
+                // gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+                // source.connect(gainNode);
+                // gainNode.connect(audioCtx.destination);
+                // gainNode.gain.exponentialRampToValueAtTime(1.0, audioCtx.currentTime + 2);
+                audio.volume = 0;
+                audio.addEventListener("play", () => {
+                    fade_in(audio);
+                });
+                audio.addEventListener("pause", () => {
+                    fade_out(audio);
+                });
                 if (this.audio.track[type] !== null) {
-                    // Would be nice to fade it here...
-
-                           
-
                     this.audio.track[type].pause();
-                    $("audio").on("pause", function() {
-                        console.log("VI PAUSAR TYDLIGEN")
-                    })                            
                 }
-
                 if (this.audio.track["music"]) {
-                                 
                     this.audio.track["music"].pause();
                 }
 
                 this.audio.track[type] = audio;
                 this.audio.track[type].play();
 
+                this.audio.typeIsPlaying = type;
 
                 if (type == "story") {
                     story.isPlaying = true;
@@ -114,12 +121,20 @@ function state() {
                     });
                 } else {
                     this.audio.track[type].addEventListener("ended", () => { 
-                                 
+                
                         this.audio.track["music"].play();
+                        this.audio.typeIsPlaying = type;
                     });
                     // console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
                 }
             }
+
+            
+        },
+        
+        pauseAudio: function() {
+
+
         },
 
         storyAudioEnded: function () {
@@ -128,11 +143,9 @@ function state() {
     };
 }
 
-
 document.addEventListener("DOMContentLoaded", function() {
     window.initQR();
 });
-
 
 function getAudio() {
     return document.getElementById("audioPlayer");    
@@ -142,24 +155,26 @@ function getSource() {
     return document.getElementById("audioSource");
 }
 
-var music;
-
-function create(){
-    music = music.add.audio('music');
-    music.onDecoded.add(start,this);
+function fade_out(audio){
+    if (audio.volume >= 0.05) {
+        audio.volume -= 0.05;
+        window.setTimeout(() => {
+            fade_out(audio);
+        }, 50);
+    }
 }
 
-function start() {
-   music.fadeIn(4000);
-
-}
-function render() {
-    game.debug.soundInfo(music, 20, 32);
+function fade_in(audio) {
+    if (audio.volume <= 0.95) {
+        audio.volume += 0.05;
+        window.setTimeout(() => {
+            fade_in(audio);
+        }, 50);
+    }
 }
 
 function loadStory(story_id, callback) {
     $.get("data/stations/" + story_id + ".json", callback); 
 }
-
 
 window.state = state;
