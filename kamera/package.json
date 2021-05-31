@@ -7,7 +7,6 @@
     "start": "webpack serve",
     "build": "webpack"
   },
-  "dependencies": {},
   "devDependencies": {
     "css-loader": "^5.2.1",
     "sass": "^1.32.8",
@@ -17,5 +16,8 @@
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "howler": "^2.2.1"
+  }
 }

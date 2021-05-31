@@ -1,7 +1,13 @@
 let AudioContext = window.AudioContext || window.webkitAudioContext;
+import {Howl, Howler} from 'howler';
+
 function state() {
     return {
         story: {
+            isPlaying: false,
+            data: {}
+        },
+        backgroundmusic: {
             isPlaying: false,
             data: {}
         },
@@ -18,6 +24,7 @@ function state() {
         },
         audio: {
             typeIsPlaying: "",
+            currPlaying: null,
             track: {
                 story: null,
                 music: null,
@@ -81,12 +88,10 @@ function state() {
             let story = this.story;
             let state = this;
 
-            console.log("filepath and type: ", filepath, type);
-
             if (type == "story" && story.isPlaying == true) {
                 console.log("Story is playing, wait until finished.")
             } else {
-                let audio = new Audio("data/audio/" + filepath);
+                // let audio = new Audio("data/audio/" + filepath);
                 // let audioCtx = new AudioContext();
                 // let source = audioCtx.createMediaElementSource(audio);
                 // let gainNode = audioCtx.createGain();
@@ -94,17 +99,26 @@ function state() {
                 // source.connect(gainNode);
                 // gainNode.connect(audioCtx.destination);
                 // gainNode.gain.exponentialRampToValueAtTime(1.0, audioCtx.currentTime + 2);
-                audio.volume = 0;
-                audio.addEventListener("play", () => {
-                    fade_in(audio);
+                // audio.volume = 0;
+                // audio.addEventListener("play", () => {
+                //     fade_in(audio);
+                // });
+                // audio.addEventListener("pause", () => {
+                //     fade_out(audio);
+                // });
+
+                let audio = new Howl({
+                    src: ['data/audio/' + filepath]
                 });
-                audio.addEventListener("pause", () => {
-                    fade_out(audio);
-                });
+
                 if (this.audio.track[type] !== null) {
+                    console.log("pausar den gamla ljudet... typen: ", type);
                     this.audio.track[type].pause();
                 }
+
+
                 if (this.audio.track["music"]) {
+                    console.log("pausar bakgrundsmusik");
                     this.audio.track["music"].pause();
                 }
 
@@ -113,19 +127,29 @@ function state() {
 
                 this.audio.typeIsPlaying = type;
 
+                // If type i story, wait until the story ended. Set story.isPlaying to false.
+                // Other type of audios, wait until they ended. Play backgroundmusic.
                 if (type == "story") {
                     story.isPlaying = true;
                     // console.log("story isPlaying value should be set to true: ", story.isPlaying)
-                    this.audio.track[type].addEventListener("ended", () => {
+                    // this.audio.track[type].addEventListener("ended", () => {
+                    //     state.storyAudioEnded();
+                    // });
+                    this.audio.track[type].on('end', function(){
+                        console.log("the audio ended: ")
                         state.storyAudioEnded();
-                    });
+                    })
                 } else {
-                    this.audio.track[type].addEventListener("ended", () => { 
+                    // this.audio.track[type].addEventListener("ended", () => { 
                 
-                        this.audio.track["music"].play();
-                        this.audio.typeIsPlaying = type;
-                    });
-                    // console.log("File type: ", type, " story.isPlaying: ", story.isPlaying);
+                    //     this.audio.track["music"].play();
+                    //     this.audio.typeIsPlaying = type;
+                    // });
+                    this.audio.track[type].on('end', function(){
+                        console.log("the audio ended, playing backgroundmusic ")
+                        this.audio.track[""]
+                        state.storyAudioEnded();
+                    })
                 }
             }
 
